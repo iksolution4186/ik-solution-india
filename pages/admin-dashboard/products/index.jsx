@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase.config";
+import { db } from "../../../firebase.config";
+import Image from "next/image";
 import {
   onSnapshot,
   collection,
@@ -13,7 +14,7 @@ const Dashboard = () => {
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
-    const collectionRef = collection(db, "users");
+    const collectionRef = collection(db, "products");
 
     onSnapshot(collectionRef, (querySnapshot) => {
       const users = [];
@@ -26,27 +27,28 @@ const Dashboard = () => {
   }, []);
 
   const deleteUser = async (id) => {
-    const userRef = doc(collection(db, "users"), id);
+    const userRef = doc(collection(db, "products"), id);
     await deleteDoc(userRef);
   };
   const updateUser = async (id, updatedUser) => {
-    const userRef = doc(collection(db, "users"), id);
+    const userRef = doc(collection(db, "products"), id);
     await updateDoc(userRef, updatedUser);
     setEditingUser(null);
   };
 
   return (
-    <div className="container mx-auto mt-8">
-      <h2 className="mb-4 text-2xl font-medium">Dashboard</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full table-auto">
+    <div className="container mx-auto mt-32 mb-10 w-fit">
+      <h2 className="mb-4 text-2xl font-medium text-center">Admin Dashboard</h2>
+      <nav className="text-center">i AM NAV</nav>
+      <div className="overflow-x-scroll mt-10  w-[95vw]">
+        <table className="w-full ">
           <thead>
             <tr>
               <th className="px-4 py-2">Id</th>
+              <th className="px-4 py-2">Image</th>
               <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Phone Number</th>
-              <th className="px-4 py-2">Actions</th>
+              <th className="px-4 py-2">Price</th>
+              <th className="px-4 py-2">Delete / Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -55,9 +57,11 @@ const Dashboard = () => {
                 <td className="px-4 py-2 border">{user.id}</td>
                 {editingUser?.id === user.id ? (
                   <>
+                    <td className="px-4 py-2 border">img</td>
                     <td className="px-4 py-2 border">
                       <input
                         type="text"
+                        className="w-24"
                         defaultValue={user.name}
                         onChange={(e) =>
                           setEditingUser({
@@ -67,30 +71,21 @@ const Dashboard = () => {
                         }
                       />
                     </td>
+
                     <td className="px-4 py-2 border">
                       <input
                         type="text"
-                        defaultValue={user.email}
+                        defaultValue={user.price}
+                        className="w-24"
                         onChange={(e) =>
                           setEditingUser({
                             ...editingUser,
-                            email: e.target.value,
+                            price: e.target.value,
                           })
                         }
                       />
                     </td>
-                    <td className="px-4 py-2 border">
-                      <input
-                        type="text"
-                        defaultValue={user.phone}
-                        onChange={(e) =>
-                          setEditingUser({
-                            ...editingUser,
-                            phone: e.target.value,
-                          })
-                        }
-                      />
-                    </td>
+
                     <td className="px-4 py-2 border">
                       <button
                         className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
@@ -108,12 +103,20 @@ const Dashboard = () => {
                   </>
                 ) : (
                   <>
-                    <td className="px-4 py-2 border">{user.name}</td>
-                    <td className="px-4 py-2 border">{user.email}</td>
-                    <td className="px-4 py-2 border">{user.phone}</td>
                     <td className="px-4 py-2 border">
+                      {" "}
+                      {/* <Image
+                        src={user.image}
+                        alt="product image"
+                        className="w-16 h-16"
+                      /> */}
+                    </td>
+                    <td className="px-4 py-2 border">{user.name}</td>
+                    <td className="px-4 py-2 border">{user.price}</td>
+
+                    <td className="px-4 py-2 border ">
                       <button
-                        className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                        className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-primary hover:text-secondary"
                         onClick={() => setEditingUser(user)}
                       >
                         Edit

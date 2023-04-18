@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { auth } from "../firebase.config.js";
-import {  signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -44,7 +44,7 @@ const LoginPage = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
                   placeholder="Email address"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -60,7 +60,7 @@ const LoginPage = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
                   placeholder="Password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
@@ -96,7 +96,7 @@ const LoginPage = () => {
               </div>
             )}
 
-            <div className="flex items-center justify-between mt-6">
+            {/* <div className="flex items-center justify-between mt-6">
               <div className="flex items-center">
                 <input
                   id="remember-me"
@@ -120,16 +120,16 @@ const LoginPage = () => {
                   Forgot your password?
                 </a>
               </div>
-            </div>
+            </div> */}
 
             <div>
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-secondary group hover:text-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
-                    className="w-5 h-5 text-indigo-500 group-hover:text-indigo-400"
+                    className="w-5 h-5 text-tertiary group-hover:text-secondary"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"

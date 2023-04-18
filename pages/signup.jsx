@@ -12,8 +12,20 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    const currentDate = new Date();
+    let year = currentDate.getFullYear();
+    let month = currentDate.getMonth() + 1; // note that getMonth() returns 0 for January, 1 for February, etc.
+    let day = currentDate.getDate();
 
+    event.preventDefault();
+    const signUpData = {
+      name,
+      email,
+      phone,
+      status: true,
+      RegisteredDate: day + "/" + month + "/" + year,
+      WhatsAppBalance: 0,
+    };
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
@@ -21,11 +33,7 @@ const SignUpPage = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, "users", name), {
-        name,
-        email,
-        phone,
-      });
+      await setDoc(doc(db, "users", name), signUpData);
       setName("");
       setEmail("");
       setPhone("");
@@ -57,7 +65,7 @@ const SignUpPage = () => {
                   type="text"
                   autoComplete="name"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
                   placeholder="Name"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -73,7 +81,7 @@ const SignUpPage = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
                   placeholder="Email address"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -89,7 +97,7 @@ const SignUpPage = () => {
                   type="tel"
                   autoComplete="tel"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
                   placeholder="Phone number"
                   value={phone}
                   onChange={(event) => setPhone(event.target.value)}
@@ -105,7 +113,7 @@ const SignUpPage = () => {
                   type="password"
                   autoComplete="new-password"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
                   placeholder="Password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
@@ -121,7 +129,7 @@ const SignUpPage = () => {
                   type="password"
                   autoComplete="new-password"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
@@ -132,11 +140,11 @@ const SignUpPage = () => {
             <div>
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-secondary group hover:text-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
-                    className="w-5 h-5 text-indigo-500 group-hover:text-indigo-400"
+                    className="w-5 h-5 text-tertiary group-hover:text-secondary"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
@@ -144,7 +152,7 @@ const SignUpPage = () => {
                   >
                     <path
                       fillRule="evenodd"
-                      d="M10 0C4.486 0 0 4.486 0 10s4.486 10 10 10 10-4.486 10-10S15.514 0 10 0zm3.707 10.293a1 1 0 00-1.414-1.414l-2.293 2.293V6a1 1 0 10-2 0v5.586l-2.293-2.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 000-1.414z"
+                      d="M10 0C4.486 0 0 4.486 0 10s4.486 10 10 10 10-4.486 10-10S15.514 0 10 0zm3.707 10.293a1 1 0 00-1.414-1.414l-2.293 2.293V6a1 1 0 10-2 0v5.586l-2.293-2.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3z"
                       clipRule="evenodd"
                     />
                   </svg>
