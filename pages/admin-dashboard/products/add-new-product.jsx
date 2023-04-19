@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { setDoc, doc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
 
 import { db } from "@/firebase.config";
@@ -28,13 +28,16 @@ export default function AddProductForm() {
     const storageRef = ref(getStorage(), `images/${image.name}`);
     await uploadBytes(storageRef, image);
 
+    // Add Download Url
+    const downloadURL = await getDownloadURL(storageRef);
+
     // Add product to Firestore
     const productRef = doc(db, "products", name);
     const newProduct = {
       id: name,
       name,
       price,
-      image: storageRef.fullPath,
+      image: downloadURL,
     };
     await setDoc(productRef, newProduct);
 

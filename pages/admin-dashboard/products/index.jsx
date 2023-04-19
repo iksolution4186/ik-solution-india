@@ -105,11 +105,12 @@ const Dashboard = () => {
                   <>
                     <td className="px-4 py-2 border">
                       {" "}
-                      {/* <Image
+                      <Image
                         src={user.image}
                         alt="product image"
-                        className="w-16 h-16"
-                      /> */}
+                        width={"100"}
+                        height={"100"}
+                      />
                     </td>
                     <td className="px-4 py-2 border">{user.name}</td>
                     <td className="px-4 py-2 border">{user.price}</td>
