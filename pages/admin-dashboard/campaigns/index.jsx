@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
-    const collectionRef = collection(db, "products");
+    const collectionRef = collection(db, "wapps");
 
     onSnapshot(collectionRef, (querySnapshot) => {
       const users = [];
@@ -27,11 +27,11 @@ const Dashboard = () => {
   }, []);
 
   const deleteUser = async (id) => {
-    const userRef = doc(collection(db, "products"), id);
+    const userRef = doc(collection(db, "wapps"), id);
     await deleteDoc(userRef);
   };
   const updateUser = async (id, updatedUser) => {
-    const userRef = doc(collection(db, "products"), id);
+    const userRef = doc(collection(db, "wapps"), id);
     await updateDoc(userRef, updatedUser);
     setEditingUser(null);
   };
@@ -44,55 +44,42 @@ const Dashboard = () => {
         <table className="w-full ">
           <thead>
             <tr>
-              <th className="px-4 py-2">Id</th>
-              <th className="px-4 py-2">Image</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Price</th>
-              <th className="px-4 py-2">Delete / Edit</th>
+              <th className="px-4 py-2">Date</th>
+              <th className="px-4 py-2">Caption</th>
+              <th className="px-4 py-2">Total Message</th>
+              <th className="px-4 py-2">Campaign Status</th>
+              <th className="px-4 py-2">Download Details</th>
+              <th className="px-4 py-2">Edit / Delete</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id}>
-                <td className="px-4 py-2 border">{user.id}</td>
+              <tr key={user.caption}>
                 {editingUser?.id === user.id ? (
                   <>
+                    <td className="px-4 py-2 border"> {user.RegisteredDate}</td>
+                    <td className="px-4 py-2 border">{user.title}</td>
+                    <td className="px-4 py-2 border">{user.Messages}</td>
                     <td className="px-4 py-2 border">
-                      <Image
-                        src={user.image}
-                        alt="product image"
-                        width={"100"}
-                        height={"100"}
-                      />
-                    </td>
-                    <td className="px-4 py-2 border">
-                      <input
-                        type="text"
-                        className="w-24"
-                        defaultValue={user.name}
+                      <select
+                        name="campaign status"
+                        id="campaign status"
+                        defaultValue={user.CampaignStatus}
                         onChange={(e) =>
                           setEditingUser({
                             ...editingUser,
-                            name: e.target.value,
+                            CampaignStatus: e.target.value,
                           })
                         }
-                      />
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="pending">Rejected</option>
+                        <option value="delivered">Delivered</option>
+                      </select>
                     </td>
-
                     <td className="px-4 py-2 border">
-                      <input
-                        type="text"
-                        defaultValue={user.price}
-                        className="w-24"
-                        onChange={(e) =>
-                          setEditingUser({
-                            ...editingUser,
-                            price: e.target.value,
-                          })
-                        }
-                      />
+                      download file / download img
                     </td>
-
                     <td className="px-4 py-2 border">
                       <button
                         className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
@@ -110,17 +97,13 @@ const Dashboard = () => {
                   </>
                 ) : (
                   <>
+                    <td className="px-4 py-2 border"> {user.RegisteredDate}</td>
+                    <td className="px-4 py-2 border">{user.title}</td>
+                    <td className="px-4 py-2 border">{user.Messages}</td>
+                    <td className="px-4 py-2 border">{user.CampaignStatus}</td>
                     <td className="px-4 py-2 border">
-                      {" "}
-                      <Image
-                        src={user.image}
-                        alt="product image"
-                        width={"100"}
-                        height={"100"}
-                      />
+                      download file / download img
                     </td>
-                    <td className="px-4 py-2 border">{user.name}</td>
-                    <td className="px-4 py-2 border">{user.price}</td>
 
                     <td className="px-4 py-2 border ">
                       <button
