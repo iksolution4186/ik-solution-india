@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { setDoc, doc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
 
 import { db } from "@/firebase.config";
+import { MyContext } from "@/assets/userContext";
 
 export default function AddProductForm() {
   const [name, setName] = useState("");
@@ -11,6 +12,21 @@ export default function AddProductForm() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const user = useContext(MyContext);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+    if (user?.email === "mkg@admin.in") {
+      console.log("Welcome Admin");
+    } else {
+      router.push("/login");
+      setTimeout(() => {
+        alert("unauthorised");
+      }, 2000);
+    }
+  }, []);
 
   const handleNameChange = (e) => setName(e.target.value);
   const handlePriceChange = (e) => setPrice(e.target.value);

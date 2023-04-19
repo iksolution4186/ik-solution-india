@@ -15,6 +15,13 @@ const firebaseConfig = {
   appId: "1:619578995557:web:eae9d16a066768472ea78c",
 };
 
+// Get Firebase auth instance
+
+// Listen for changes in authentication state
+export function onAuthStateChange(callback) {
+  return onAuthStateChanged(auth, callback);
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

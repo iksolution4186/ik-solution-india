@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase.config";
-import Image from "next/image";
+
+import { useRouter } from "next/router";
+import { MyContext } from "@/assets/userContext";
 import {
   onSnapshot,
   collection,
@@ -12,10 +14,16 @@ import {
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
+  const router = useRouter();
+  const user = useContext(MyContext);
+
+  console.log(user);
 
   useEffect(() => {
     const collectionRef = collection(db, "wapps");
-
+    if (!user) {
+      router.push("/login");
+    }
     onSnapshot(collectionRef, (querySnapshot) => {
       const users = [];
       querySnapshot.forEach((doc) => {

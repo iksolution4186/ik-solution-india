@@ -5,8 +5,11 @@ import {
   MdOutlineKeyboardArrowUp,
   MdArrowRight,
 } from "react-icons/md";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase.config.js";
+import { MyContext } from "@/assets/userContext.js";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Image from "next/image";
 import logo from "../assets/ik_croped_logo.webp";
 
@@ -16,7 +19,18 @@ const Header = () => {
   const [innerWidth, setInnerWidth] = useState();
   const router = useRouter();
   const path = router.asPath;
-
+  const user = useContext(MyContext);
+  function logOut() {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        alert("signed out");
+        router.push("/login");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  }
   useEffect(() => {
     setInnerWidth(window.innerWidth);
   }, []);
@@ -195,19 +209,30 @@ const Header = () => {
                 Quick Message
               </a>
             </li>
+
+            <li className="flex items-center ">
+              {user ? (
+                <button
+                  className={
+                    " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+                  }
+                  onClick={logOut}
+                >
+                  Log Out
+                </button>
+              ) : (
+                <Link
+                  href={"/login"}
+                  className={
+                    " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+                  }
+                >
+                  Log In
+                </Link>
+              )}
+            </li>
           </ul>
         </nav>
-        {/* <div className="flex items-center contact__btn md:hidden">
-          <a
-            href={"#footer"}
-            className={
-              "  border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
-            }
-            onClick={() => setBarToggle(false)}
-          >
-            Quick Message
-          </a>
-        </div> */}
       </header>{" "}
     </div>
   );

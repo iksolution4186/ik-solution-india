@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { db } from "../firebase.config";
 import { auth } from "../firebase.config.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import Link from "next/link";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
@@ -12,12 +13,22 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     const currentDate = new Date();
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth() + 1; // note that getMonth() returns 0 for January, 1 for February, etc.
     let day = currentDate.getDate();
 
-    event.preventDefault();
+    let uid = generateRegistrationId().toString();
+    let docRef = doc(db, "users", uid);
+    let docSnap = await getDoc(docRef);
+
+    while (docSnap.exists()) {
+      uid = generateRegistrationId().toString();
+      docRef = doc(db, "users", uid);
+      docSnap = await getDoc(docRef);
+    }
+
     const signUpData = {
       name,
       email,
@@ -26,14 +37,18 @@ const SignUpPage = () => {
       RegisteredDate: day + "/" + month + "/" + year,
       WhatsAppBalance: 0,
     };
+    handleDataSubmission(uid, signUpData);
+
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
     }
+  };
 
+  const handleDataSubmission = async (uid, signUpData) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      await setDoc(doc(db, "users", name), signUpData);
+      await setDoc(doc(db, "users", uid), signUpData);
       setName("");
       setEmail("");
       setPhone("");
@@ -43,6 +58,10 @@ const SignUpPage = () => {
       alert(error.message);
     }
   };
+  function generateRegistrationId() {
+    // Generate a random 6-digit number between 100000 and 999999
+    return Math.floor(Math.random() * 900000) + 100000;
+  }
 
   return (
     <>
@@ -159,6 +178,11 @@ const SignUpPage = () => {
                 </span>
                 Sign Up
               </button>
+            </div>
+            <div>
+              <p>
+                Already a member? <Link href={"/login"}>Log In</Link>{" "}
+              </p>
             </div>
           </form>
         </div>

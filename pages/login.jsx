@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { auth } from "../firebase.config.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import Link from "next/link.js";
+import { MyContext } from "@/assets/userContext.js";
 
 const LoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  const user = useContext(MyContext);
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push("admin-dashboard");
+      if (user?.email === "mkg@admin.in") {
+        router.push("admin-dashboard");
+      } else {
+        router.push("member-dashboard");
+      }
     } catch (error) {
       console.log("from error");
       console.log(error);
@@ -144,6 +151,11 @@ const LoginPage = () => {
                 </span>
                 Sign in
               </button>
+            </div>
+            <div>
+              <p>
+                Not a member? <Link href={"/signup"}>Sign Up</Link>{" "}
+              </p>
             </div>
           </form>
         </div>

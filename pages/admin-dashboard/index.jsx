@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../firebase.config";
 import Link from "next/link";
 import {
@@ -8,14 +8,31 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import { MyContext } from "@/assets/userContext";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
 
+  const user = useContext(MyContext);
+  const router = useRouter();
+
+  console.log(user);
+
   useEffect(() => {
     const collectionRef = collection(db, "users");
-
+    if (!user) {
+      router.push("/login");
+    }
+    if (user?.email === "mkg@admin.in") {
+      console.log("Welcome Admin");
+    } else {
+      router.push("/login");
+      setTimeout(() => {
+        alert("unauthorised");
+      }, 2000);
+    }
     onSnapshot(collectionRef, (querySnapshot) => {
       const users = [];
       querySnapshot.forEach((doc) => {
@@ -24,7 +41,7 @@ const Dashboard = () => {
       console.log("Current users in collection:", users);
       setUsers(users);
     });
-  }, []);
+  }, [user, router]);
 
   const deleteUser = async (id) => {
     const userRef = doc(collection(db, "users"), id);
