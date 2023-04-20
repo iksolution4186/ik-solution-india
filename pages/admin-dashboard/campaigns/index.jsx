@@ -12,8 +12,8 @@ import { MyContext } from "@/assets/userContext";
 import { useRouter } from "next/router";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [editingUser, setEditingUser] = useState(null);
+  const [campaigns, setCampaigns] = useState([]);
+  const [editingCampaign, setEditingCampaign] = useState(null);
   const user = useContext(MyContext);
   const router = useRouter();
 
@@ -31,30 +31,39 @@ const Dashboard = () => {
         alert("unauthorised");
       }, 2000);
     }
+
     onSnapshot(collectionRef, (querySnapshot) => {
-      const users = [];
+      const campaignsDummyArr = [];
+      console.log(campaignsDummyArr, "from snapshot");
       querySnapshot.forEach((doc) => {
-        users.push({ id: doc.id, ...doc.data() });
+        campaignsDummyArr.push({ id: doc.id, ...doc.data() });
       });
-      console.log("Current users in collection:", users);
-      setUsers(users);
+      console.log("Current campaigns in collection:", campaignsDummyArr);
+      setCampaigns(campaignsDummyArr);
     });
   }, [user, router]);
 
-  const deleteUser = async (id) => {
-    const userRef = doc(collection(db, "wapps"), id);
-    await deleteDoc(userRef);
+  const deleteCampaign = async (id) => {
+    const campaignRef = doc(collection(db, "wapps"), id);
+    await deleteDoc(campaignRef);
   };
-  const updateUser = async (id, updatedUser) => {
-    const userRef = doc(collection(db, "wapps"), id);
-    await updateDoc(userRef, updatedUser);
-    setEditingUser(null);
+  const updateCampaign = async (id, updatedCampaign, index) => {
+    const campaignRef = doc(collection(db, "wapps"), id);
+    const campaignSnapshot = await getDoc(campaignRef);
+    const campaignData = campaignSnapshot.data();
+
+    // Update the specific array element at the given index
+    campaignData.updatedCampaign[index] = updatedCampaign;
+
+    // Update the document in Firestore
+    await setDoc(campaignRef, campaignData);
+    setEditingCampaign(null);
   };
 
   return (
     <div className="container mx-auto mt-32 mb-10 w-fit">
       <h2 className="mb-4 text-2xl font-medium text-center">Admin Dashboard</h2>
-      <nav className="text-center">i AM NAV</nav>
+
       <div className="overflow-x-scroll mt-10  w-[95vw]">
         <table className="w-full ">
           <thead>
@@ -68,75 +77,95 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr key={user.caption}>
-                {editingUser?.id === user.id ? (
-                  <>
-                    <td className="px-4 py-2 border"> {user.RegisteredDate}</td>
-                    <td className="px-4 py-2 border">{user.title}</td>
-                    <td className="px-4 py-2 border">{user.Messages}</td>
-                    <td className="px-4 py-2 border">
-                      <select
-                        name="campaign status"
-                        id="campaign status"
-                        defaultValue={user.CampaignStatus}
-                        onChange={(e) =>
-                          setEditingUser({
-                            ...editingUser,
-                            CampaignStatus: e.target.value,
-                          })
-                        }
-                      >
-                        <option value="pending">Pending</option>
-                        <option value="pending">Rejected</option>
-                        <option value="delivered">Delivered</option>
-                      </select>
-                    </td>
-                    <td className="px-4 py-2 border">
-                      download file / download img
-                    </td>
-                    <td className="px-4 py-2 border">
-                      <button
-                        className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-                        onClick={() => updateUser(user.id, editingUser)}
-                      >
-                        Save
-                      </button>
-                      <button
-                        className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-700"
-                        onClick={() => setEditingUser(null)}
-                      >
-                        Cancel
-                      </button>
-                    </td>
-                  </>
-                ) : (
-                  <>
-                    <td className="px-4 py-2 border"> {user.RegisteredDate}</td>
-                    <td className="px-4 py-2 border">{user.title}</td>
-                    <td className="px-4 py-2 border">{user.Messages}</td>
-                    <td className="px-4 py-2 border">{user.CampaignStatus}</td>
-                    <td className="px-4 py-2 border">
-                      download file / download img
-                    </td>
+            {campaigns.map((campaignArr) => (
+              <>
+                {campaignArr.campaigns.map((campaign) => {
+                  return (
+                    <tr key={campaign.title}>
+                      {editingCampaign?.id === campaign.id ? (
+                        <>
+                          <td className="px-4 py-2 border">
+                            {" "}
+                            {campaign.RegisteredDate}
+                          </td>
+                          <td className="px-4 py-2 border">{campaign.title}</td>
+                          <td className="px-4 py-2 border">
+                            {campaign.Messages}
+                          </td>
+                          <td className="px-4 py-2 border">
+                            <select
+                              name="campaign status"
+                              id="campaign status"
+                              defaultValue={campaign.CampaignStatus}
+                              onChange={(e) =>
+                                setEditingCampaign({
+                                  ...editingCampaign,
+                                  CampaignStatus: e.target.value,
+                                })
+                              }
+                            >
+                              <option value="pending">Pending</option>
+                              <option value="pending">Rejected</option>
+                              <option value="delivered">Delivered</option>
+                            </select>
+                          </td>
+                          <td className="px-4 py-2 border">
+                            download file / download img
+                          </td>
+                          <td className="px-4 py-2 border">
+                            <button
+                              className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                              onClick={() =>
+                                updateCampaign(campaignArr.id, editingCampaign)
+                              }
+                            >
+                              Save
+                            </button>
+                            <button
+                              className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-700"
+                              onClick={() => setEditingCampaign(null)}
+                            >
+                              Cancel
+                            </button>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td className="px-4 py-2 border">
+                            {" "}
+                            {campaign.RegisteredDate}
+                          </td>
+                          <td className="px-4 py-2 border">{campaign.title}</td>
+                          <td className="px-4 py-2 border">
+                            {campaign.Messages}
+                          </td>
+                          <td className="px-4 py-2 border">
+                            {campaign.CampaignStatus}
+                          </td>
+                          <td className="px-4 py-2 border">
+                            download file / download img
+                          </td>
 
-                    <td className="px-4 py-2 border ">
-                      <button
-                        className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-primary hover:text-secondary"
-                        onClick={() => setEditingUser(user)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                        onClick={() => deleteUser(user.id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </>
-                )}
-              </tr>
+                          <td className="px-4 py-2 border ">
+                            <button
+                              className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-primary hover:text-secondary"
+                              onClick={() => setEditingCampaign(campaign)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
+                              onClick={() => deleteCampaign(campaign.id)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  );
+                })}
+              </>
             ))}
           </tbody>
         </table>

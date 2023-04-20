@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import {
   getStorage,
@@ -6,8 +6,10 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { arrayUnion, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase.config";
+import { useRouter } from "next/router";
+import { MyContext } from "@/assets/userContext";
 
 const Form = () => {
   const [title, setTitle] = useState("");
@@ -16,16 +18,17 @@ const Form = () => {
   const [url, setUrl] = useState("");
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
+  const user = useContext(MyContext);
+  const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleDataSubmission = async (uid) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, `images/${image.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
     const currentDate = new Date();
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth() + 1; // note that getMonth() returns 0 for January, 1 for February, etc.
     let day = currentDate.getDate();
-    const storage = getStorage();
-    const storageRef = ref(storage, `images/${image.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, image);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -39,6 +42,7 @@ const Form = () => {
       async () => {
         const imageUrl = await getDownloadURL(storageRef);
         const form = {
+          id: uid,
           title,
           description,
           url,
@@ -50,14 +54,46 @@ const Form = () => {
         };
         // You can save the form data to Firestore or Realtime Database
         try {
-          const docRef = await addDoc(collection(db, "wapps"), form);
-          console.log("Form data saved successfully with ID: ", docRef.id);
+          const formRef = doc(db, "wapps", user.uid);
+          const docSnap = await getDoc(formRef);
+          if (docSnap.exists()) {
+            await updateDoc(formRef, {
+              campaigns: arrayUnion(form),
+            });
+          } else {
+            await setDoc(formRef, {
+              campaigns: [form],
+            });
+          }
+          router.push("/member-dashboard");
+          // console.log("Form data saved successfully with ID: ", docRef.id);
         } catch (error) {
+          alert(error.message);
           console.log(error);
         }
       }
     );
   };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    let uid = generateRegistrationId().toString();
+    let docRef = doc(db, "users", uid);
+    let docSnap = await getDoc(docRef);
+
+    while (docSnap.exists()) {
+      uid = generateRegistrationId().toString();
+      docRef = doc(db, "users", uid);
+      docSnap = await getDoc(docRef);
+    }
+    handleDataSubmission(uid);
+  }
+
+  function generateRegistrationId() {
+    // Generate a random 6-digit number between 100000 and 999999
+    return Math.floor(Math.random() * 900000) + 100000;
+  }
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {

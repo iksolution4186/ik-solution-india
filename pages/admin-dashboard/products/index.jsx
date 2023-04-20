@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../../firebase.config";
 import Image from "next/image";
+import Link from "next/link";
 import {
   onSnapshot,
   collection,
@@ -52,7 +53,11 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto mt-32 mb-10 w-fit">
       <h2 className="mb-4 text-2xl font-medium text-center">Admin Dashboard</h2>
-      <nav className="text-center">i AM NAV</nav>
+      <div className="text-center">
+        <Link href="/admin-dashboard/products/add-new-product">
+          Add New Products
+        </Link>
+      </div>
       <div className="overflow-x-scroll mt-10  w-[95vw]">
         <table className="w-full ">
           <thead>

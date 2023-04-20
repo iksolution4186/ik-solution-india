@@ -20,17 +20,7 @@ const Header = () => {
   const router = useRouter();
   const path = router.asPath;
   const user = useContext(MyContext);
-  function logOut() {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        alert("signed out");
-        router.push("/login");
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  }
+
   useEffect(() => {
     setInnerWidth(window.innerWidth);
   }, []);
@@ -207,28 +197,6 @@ const Header = () => {
               >
                 Quick Message
               </a>
-            </li>
-
-            <li className="flex items-center ">
-              {user ? (
-                <button
-                  className={
-                    " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
-                  }
-                  onClick={logOut}
-                >
-                  Log Out
-                </button>
-              ) : (
-                <Link
-                  href={"/login"}
-                  className={
-                    " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
-                  }
-                >
-                  Log In
-                </Link>
-              )}
             </li>
           </ul>
         </nav>

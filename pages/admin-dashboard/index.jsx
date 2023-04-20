@@ -18,17 +18,17 @@ const Dashboard = () => {
   const user = useContext(MyContext);
   const router = useRouter();
 
-  console.log(user);
-
   useEffect(() => {
     const collectionRef = collection(db, "users");
     if (!user) {
       router.push("/login");
     }
+    console.log(user);
     if (user?.email === "mkg@admin.in") {
       console.log("Welcome Admin");
     } else {
       router.push("/login");
+      console.log("else");
       setTimeout(() => {
         alert("unauthorised");
       }, 2000);
@@ -56,7 +56,7 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto mt-32 mb-10 w-fit">
       <h2 className="mb-4 text-2xl font-medium text-center">Admin Dashboard</h2>
-      <nav className="text-center">i AM NAV</nav>
+
       <div className="overflow-x-scroll mt-10  w-[95vw]">
         <table className="w-full ">
           <thead>

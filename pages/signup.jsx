@@ -4,6 +4,7 @@ import { auth } from "../firebase.config.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
@@ -11,6 +12,8 @@ const SignUpPage = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,13 +50,24 @@ const SignUpPage = () => {
 
   const handleDataSubmission = async (uid, signUpData) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userRef = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const uid = userRef.user.uid;
+      console.log(uid);
       await setDoc(doc(db, "users", uid), signUpData);
+
       setName("");
       setEmail("");
       setPhone("");
       setPassword("");
       setConfirmPassword("");
+      alert(
+        "User signed up successfully, Please log in with these credentials"
+      );
+      router.push("/login");
     } catch (error) {
       alert(error.message);
     }

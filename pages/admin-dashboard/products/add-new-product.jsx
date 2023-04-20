@@ -58,7 +58,7 @@ export default function AddProductForm() {
     await setDoc(productRef, newProduct);
 
     setLoading(false);
-    // router.push("/");
+    router.push("/admin-dashboard/products");
   };
 
   return (
