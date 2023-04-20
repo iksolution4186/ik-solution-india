@@ -61,7 +61,7 @@ const Dashboard = () => {
         <table className="w-full ">
           <thead>
             <tr>
-              <th className="px-4 py-2">Id</th>
+              <th className="px-4 py-2">Member Id</th>
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Phone Number</th>
               <th className="px-4 py-2">WAPP Balance</th>

@@ -49,7 +49,6 @@ const Header = () => {
   useEffect(() => {
     setBarToggle(false);
     setHovered(false);
-    console.log("i am path");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [path]);
 

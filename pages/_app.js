@@ -22,6 +22,7 @@ export default function App({ Component, pageProps }) {
         setUser(null);
       }
     });
+    console.log(user, "wrapper");
 
     return () => unsubscribe();
   }, []);

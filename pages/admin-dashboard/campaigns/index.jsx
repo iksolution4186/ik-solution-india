@@ -22,7 +22,8 @@ const Dashboard = () => {
     if (!user) {
       router.push("/login");
     }
-    if (user?.email === "mkg@admin.in") {
+    console.log(user, "from campaingns");
+    if (user?.email == "mkg@admin.in") {
       console.log("Welcome Admin");
     } else {
       router.push("/login");
@@ -38,7 +39,7 @@ const Dashboard = () => {
       console.log("Current users in collection:", users);
       setUsers(users);
     });
-  }, []);
+  }, [user, router]);
 
   const deleteUser = async (id) => {
     const userRef = doc(collection(db, "wapps"), id);

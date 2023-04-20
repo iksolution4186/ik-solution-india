@@ -11,22 +11,27 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const user = useContext(MyContext);
+  console.log(user);
 
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      if (user?.email === "mkg@admin.in") {
-        router.push("admin-dashboard");
-      } else {
-        router.push("member-dashboard");
-      }
-    } catch (error) {
-      console.log("from error");
-      console.log(error);
-      setErrorMessage(error.message);
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("sign up");
+        if (user?.email == "mkg@admin.in") {
+          console.log("if");
+          router.push("admin-dashboard");
+        } else {
+          router.push("member-dashboard");
+        }
+      })
+      .catch((error) => {
+        console.log("from error");
+        console.log(error);
+        setErrorMessage(error.message);
+      });
   };
 
   return (
