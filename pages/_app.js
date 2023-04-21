@@ -18,12 +18,14 @@ export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(true);
   const AdminHeaderPages = [
     "/admin-dashboard",
+    "/admin-dashboard/orders",
     "/admin-dashboard/products",
     "/admin-dashboard/campaigns",
     "/admin-dashboard/products/add-new-product",
   ];
   const MemberHeaderPages = [
     "/member-dashboard",
+    "/member-dashboard/wapp-send",
     "/member-dashboard/request-messages",
     "/member-dashboard/orders",
     "/member-dashboard/account",

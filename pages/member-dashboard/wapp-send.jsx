@@ -29,6 +29,7 @@ const Form = () => {
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth() + 1; // note that getMonth() returns 0 for January, 1 for February, etc.
     let day = currentDate.getDate();
+    const numLines = mobileNumbers.split("\n").length;
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -49,13 +50,14 @@ const Form = () => {
           mobileNumbers,
           RegisteredDate: day + "/" + month + "/" + year,
           imageUrl,
-          Messages: 0,
+          Messages: numLines,
           CampaignStatus: "pending",
         };
         // You can save the form data to Firestore or Realtime Database
         try {
           const formRef = doc(db, "wapps", user.uid);
           const docSnap = await getDoc(formRef);
+          // await updateDoc()
           if (docSnap.exists()) {
             await updateDoc(formRef, {
               campaigns: arrayUnion(form),
@@ -102,7 +104,7 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mx-5 mt-24 mb-10">
+    <form onSubmit={handleSubmit} className="min-h-screen mx-5 mt-24 mb-32">
       <div className="mb-4">
         <label htmlFor="title" className="block mb-2 font-bold text-gray-700">
           Title

@@ -106,6 +106,14 @@ const Header = () => {
                 Products
               </Link>
             </li>
+            <li>
+              <Link
+                href={"/admin-dashboard/orders"}
+                className={"hover:text-primary h-full flex items-center"}
+              >
+                Orders
+              </Link>
+            </li>
 
             <li className="flex items-center ">
               {user ? (
