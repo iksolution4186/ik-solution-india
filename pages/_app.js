@@ -18,6 +18,7 @@ export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(true);
   const AdminHeaderPages = [
     "/admin-dashboard",
+    "/admin-dashboard/member/[userId]",
     "/admin-dashboard/orders",
     "/admin-dashboard/products",
     "/admin-dashboard/campaigns",

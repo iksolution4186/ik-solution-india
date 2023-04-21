@@ -13,13 +13,15 @@ import {
 } from "firebase/firestore";
 import { MyContext } from "@/assets/userContext";
 import { useRouter } from "next/router";
+import ImageDownloadButton from "@/components/ImageDownloadImage";
+import Loading from "@/components/Loading";
 
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [editingCampaign, setEditingCampaign] = useState(null);
   const user = useContext(MyContext);
   const router = useRouter();
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const collectionRef = collection(db, "wapps");
     if (!user) {
@@ -41,10 +43,22 @@ const Dashboard = () => {
       querySnapshot.forEach((doc) => {
         campaignsDummyArr.push({ id: doc.id, ...doc.data() });
       });
-      console.log("Current campaigns in collection:", campaignsDummyArr);
+      console.log(
+        "Current campaigns in collection:",
+        campaignsDummyArr[0].campaigns[0].imageUrl
+      );
+      // console.log(
+      //   "Current campaigns in collection:",
+      //   campaignsDummyArr.campaigns[0].imageUrl
+      // );
       setCampaigns(campaignsDummyArr);
+      setLoading(false);
     });
   }, [user, router]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   const deleteCampaign = async (id, element_index) => {
     const campaignRef = doc(collection(db, "wapps"), id);
@@ -84,7 +98,7 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {campaigns.map((campaignArr) => (
+            {campaigns?.map((campaignArr) => (
               <>
                 {campaignArr.campaigns.map((campaign, index) => {
                   return (
@@ -154,7 +168,11 @@ const Dashboard = () => {
                             {campaign.CampaignStatus}
                           </td>
                           <td className="px-4 py-2 border">
-                            download file / download img
+                            download file /{" "}
+                            <ImageDownloadButton
+                              imageUrl={campaign.imageUrl}
+                              fileName={"Campaign Picture"}
+                            />
                           </td>
 
                           <td className="px-4 py-2 border ">

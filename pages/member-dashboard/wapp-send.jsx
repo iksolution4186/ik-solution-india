@@ -27,6 +27,7 @@ const Form = () => {
   const [progress, setProgress] = useState(0);
   const user = useContext(MyContext);
   const router = useRouter();
+  const numLines = mobileNumbers.split("\n").length;
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
@@ -62,7 +63,6 @@ const Form = () => {
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth() + 1; // note that getMonth() returns 0 for January, 1 for February, etc.
     let day = currentDate.getDate();
-    const numLines = mobileNumbers.split("\n").length;
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -118,7 +118,10 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="min-h-screen mx-5 mt-24 mb-32">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-lg min-h-screen mx-auto mt-24 mb-32"
+    >
       <div className="mb-4">
         <label htmlFor="title" className="block mb-2 font-bold text-gray-700">
           Title
@@ -145,11 +148,13 @@ const Form = () => {
           onChange={(e) => setMobileNumbers(e.target.value)}
           className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
           required
+          rows={"10"}
           placeholder="Enter Mobile Numbers like
           8872960014 
           7973994038
           9888610086"
         />
+        <p>Message Count :- {numLines}</p>
       </div>
       <div className="mb-4">
         <label htmlFor="url" className="block mb-2 font-bold text-gray-700">

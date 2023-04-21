@@ -24,6 +24,7 @@ const Dashboard = () => {
   useEffect(() => {
     const docRef = doc(db, "wapps", user.uid);
     const userRef = doc(db, "users", user.uid);
+    console.log(user);
     if (!user) {
       router.push("/login");
     }
@@ -31,9 +32,10 @@ const Dashboard = () => {
       try {
         const docSnap = await getDoc(docRef);
         const userSnap = await getDoc(userRef);
-        if (docSnap.exists() && userSnap.exists()) {
+        if (docSnap.exists() || userSnap.exists()) {
           console.log("Document data:", docSnap.data());
           setCampaigns(docSnap.data());
+          console.log(userSnap.data());
           setUserData(userSnap.data());
         } else {
           // docSnap.data() will be undefined in this case
@@ -91,93 +93,20 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {campaigns.campaigns?.map((campaign) => (
+                {campaigns?.campaigns?.map((campaign) => (
                   <tr key={campaign}>
-                    {/* <td className="px-4 py-2 border">{user.id}</td> */}
-                    {/* {editingUser?.id === user.id ? ( */}
-                    {/* <>
-                  <td className="px-4 py-2 border">
-                    <Image
-                      src={user.image}
-                      alt="product image"
-                      width={"100"}
-                      height={"100"}
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="text"
-                      className="w-24"
-                      defaultValue={user.name}
-                      onChange={(e) =>
-                        setEditingUser({
-                          ...editingUser,
-                          name: e.target.value,
-                        })
-                      }
-                    />
-                  </td>
-
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="text"
-                      defaultValue={user.price}
-                      className="w-24"
-                      onChange={(e) =>
-                        setEditingUser({
-                          ...editingUser,
-                          price: e.target.value,
-                        })
-                      }
-                    />
-                  </td>
-
-                  <td className="px-4 py-2 border">
-                    <button
-                      className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-                      onClick={() => updateUser(user.id, editingUser)}
-                    >
-                      Save
-                    </button>
-                    <button
-                      className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-700"
-                      onClick={() => setEditingUser(null)}
-                    >
-                      Cancel
-                    </button>
-                  </td>
-                </> */}
-                    {/* ) : ( */}
-                    <>
-                      <td className="px-4 py-2 border">
-                        {" "}
-                        {campaign.RegisteredDate}
-                      </td>
-                      <td className="px-4 py-2 border">{campaign.title}</td>
-                      <td className="px-4 py-2 border">{campaign.Messages}</td>
-                      <td className="px-4 py-2 border">
-                        {campaign.CampaignStatus}
-                      </td>
-                      <td className="px-4 py-2 border">
-                        download file / download img
-                      </td>
-                      {/* 
-                  <td className="px-4 py-2 border ">
-                    <button
-                      className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-primary hover:text-secondary"
-                      onClick={() => setEditingUser(user)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                      onClick={() => deleteUser(user.id)}
-                    >
-                      Delete
-                    </button>
-                  </td> */}
-                    </>
-                    {/*  )} */}
+                    <td className="px-4 py-2 border">
+                      {" "}
+                      {campaign.RegisteredDate}
+                    </td>
+                    <td className="px-4 py-2 border">{campaign.title}</td>
+                    <td className="px-4 py-2 border">{campaign.Messages}</td>
+                    <td className="px-4 py-2 border">
+                      {campaign.CampaignStatus}
+                    </td>
+                    <td className="px-4 py-2 border">
+                      download file / download img
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -67,7 +67,7 @@ const SignUpPage = () => {
       alert(
         "User signed up successfully, Please log in with these credentials"
       );
-      router.push("/login");
+      router.push("/member-dashboard");
     } catch (error) {
       alert(error.message);
     }

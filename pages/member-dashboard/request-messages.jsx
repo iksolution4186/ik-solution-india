@@ -19,16 +19,37 @@ const OrderForm = () => {
 
   const user = useContext(MyContext);
 
-  const handleFormSubmit = async (event) => {
+  function generateRegistrationId() {
+    // Generate a random 6-digit number between 100000 and 999999
+    return Math.floor(Math.random() * 9000000000) + 1000000000;
+  }
+
+  async function handleFormSubmit(event) {
     event.preventDefault();
+
+    let uid = generateRegistrationId().toString();
+    let docRef = doc(db, "orders", uid);
+    let docSnap = await getDoc(docRef);
+
+    while (docSnap.exists()) {
+      uid = generateRegistrationId().toString();
+      docRef = doc(db, "orders", uid);
+      docSnap = await getDoc(docRef);
+    }
+    handleDataSubmission(uid);
+  }
+
+  const handleDataSubmission = async (uid) => {
     const price = (messageCount / 100000) * 20000;
     const order = {
+      id: uid,
       name,
       email,
       phone,
       messageCount,
       notes,
       price,
+      status: "pending",
       // createdAt: serverTimestamp(),
     };
 
