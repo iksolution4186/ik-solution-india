@@ -6,7 +6,14 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { arrayUnion, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  FieldValue,
+} from "firebase/firestore";
 import { db } from "@/firebase.config";
 import { useRouter } from "next/router";
 import { MyContext } from "@/assets/userContext";
@@ -20,6 +27,32 @@ const Form = () => {
   const [progress, setProgress] = useState(0);
   const user = useContext(MyContext);
   const router = useRouter();
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  function generateRegistrationId() {
+    // Generate a random 6-digit number between 100000 and 999999
+    return Math.floor(Math.random() * 900000) + 100000;
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    let uid = generateRegistrationId().toString();
+    let docRef = doc(db, "users", uid);
+    let docSnap = await getDoc(docRef);
+
+    while (docSnap.exists()) {
+      uid = generateRegistrationId().toString();
+      docRef = doc(db, "users", uid);
+      docSnap = await getDoc(docRef);
+    }
+    handleDataSubmission(uid);
+  }
 
   const handleDataSubmission = async (uid) => {
     const storage = getStorage();
@@ -56,8 +89,15 @@ const Form = () => {
         // You can save the form data to Firestore or Realtime Database
         try {
           const formRef = doc(db, "wapps", user.uid);
+          const userRef = doc(db, "users", user.uid);
           const docSnap = await getDoc(formRef);
-          // await updateDoc()
+          const userSnap = await getDoc(userRef);
+          if (userSnap.data().WhatsAppBalance < numLines) {
+            throw new Error("Insufficient balance");
+          }
+          await updateDoc(userRef, {
+            WhatsAppBalance: userSnap.data().WhatsAppBalance - numLines,
+          });
           if (docSnap.exists()) {
             await updateDoc(formRef, {
               campaigns: arrayUnion(form),
@@ -75,32 +115,6 @@ const Form = () => {
         }
       }
     );
-  };
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    let uid = generateRegistrationId().toString();
-    let docRef = doc(db, "users", uid);
-    let docSnap = await getDoc(docRef);
-
-    while (docSnap.exists()) {
-      uid = generateRegistrationId().toString();
-      docRef = doc(db, "users", uid);
-      docSnap = await getDoc(docRef);
-    }
-    handleDataSubmission(uid);
-  }
-
-  function generateRegistrationId() {
-    // Generate a random 6-digit number between 100000 and 999999
-    return Math.floor(Math.random() * 900000) + 100000;
-  }
-
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
   };
 
   return (

@@ -6,6 +6,9 @@ import {
   collection,
   doc,
   deleteDoc,
+  arrayRemove,
+  getDoc,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { MyContext } from "@/assets/userContext";
@@ -43,9 +46,13 @@ const Dashboard = () => {
     });
   }, [user, router]);
 
-  const deleteCampaign = async (id) => {
+  const deleteCampaign = async (id, element_index) => {
     const campaignRef = doc(collection(db, "wapps"), id);
-    await deleteDoc(campaignRef);
+    const campaignSnapshot = await getDoc(campaignRef);
+    const campaignData = campaignSnapshot.data();
+    await updateDoc(campaignRef, {
+      campaigns: arrayRemove(campaignData.campaigns[element_index]),
+    });
   };
   const updateCampaign = async (id, updatedCampaign, index) => {
     const campaignRef = doc(collection(db, "wapps"), id);
@@ -53,7 +60,7 @@ const Dashboard = () => {
     const campaignData = campaignSnapshot.data();
 
     // Update the specific array element at the given index
-    campaignData.updatedCampaign[index] = updatedCampaign;
+    campaignData.campaigns[index] = updatedCampaign;
 
     // Update the document in Firestore
     await setDoc(campaignRef, campaignData);
@@ -79,7 +86,7 @@ const Dashboard = () => {
           <tbody>
             {campaigns.map((campaignArr) => (
               <>
-                {campaignArr.campaigns.map((campaign) => {
+                {campaignArr.campaigns.map((campaign, index) => {
                   return (
                     <tr key={campaign.title}>
                       {editingCampaign?.id === campaign.id ? (
@@ -105,7 +112,7 @@ const Dashboard = () => {
                               }
                             >
                               <option value="pending">Pending</option>
-                              <option value="pending">Rejected</option>
+                              <option value="rejected">Rejected</option>
                               <option value="delivered">Delivered</option>
                             </select>
                           </td>
@@ -116,7 +123,11 @@ const Dashboard = () => {
                             <button
                               className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
                               onClick={() =>
-                                updateCampaign(campaignArr.id, editingCampaign)
+                                updateCampaign(
+                                  campaignArr.id,
+                                  editingCampaign,
+                                  index
+                                )
                               }
                             >
                               Save
@@ -155,7 +166,9 @@ const Dashboard = () => {
                             </button>
                             <button
                               className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                              onClick={() => deleteCampaign(campaign.id)}
+                              onClick={() =>
+                                deleteCampaign(campaignArr.id, index)
+                              }
                             >
                               Delete
                             </button>

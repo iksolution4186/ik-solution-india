@@ -21,13 +21,14 @@ const OrderForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    const price = (messageCount / 100000) * 20000;
     const order = {
       name,
       email,
       phone,
       messageCount,
       notes,
+      price,
       // createdAt: serverTimestamp(),
     };
 
