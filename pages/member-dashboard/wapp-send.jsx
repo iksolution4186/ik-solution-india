@@ -1,19 +1,11 @@
 import { useContext, useState } from "react";
-
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import {
-  arrayUnion,
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  FieldValue,
-} from "firebase/firestore";
+import { arrayUnion, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase.config";
 import { useRouter } from "next/router";
 import { MyContext } from "@/assets/userContext";

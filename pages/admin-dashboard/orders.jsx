@@ -17,7 +17,7 @@ const Orders = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log(ordersData[0].orders);
+      // console.log(ordersData[0].orders);
       setOrders(ordersData);
       setLoading(false);
     };

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../../firebase.config";
 import Image from "next/image";
+import { CSVLink } from "react-csv";
+
 import {
   onSnapshot,
   collection,
@@ -22,6 +24,16 @@ const Dashboard = () => {
   const user = useContext(MyContext);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const arr = [
+    {
+      name: "karan",
+      class: "3rd",
+    },
+    {
+      name: "karan",
+      class: "3rd",
+    },
+  ];
   useEffect(() => {
     const collectionRef = collection(db, "wapps");
     if (!user) {
@@ -39,18 +51,10 @@ const Dashboard = () => {
 
     onSnapshot(collectionRef, (querySnapshot) => {
       const campaignsDummyArr = [];
-      console.log(campaignsDummyArr, "from snapshot");
       querySnapshot.forEach((doc) => {
         campaignsDummyArr.push({ id: doc.id, ...doc.data() });
       });
-      console.log(
-        "Current campaigns in collection:",
-        campaignsDummyArr[0].campaigns[0].imageUrl
-      );
-      // console.log(
-      //   "Current campaigns in collection:",
-      //   campaignsDummyArr.campaigns[0].imageUrl
-      // );
+
       setCampaigns(campaignsDummyArr);
       setLoading(false);
     });
@@ -131,7 +135,14 @@ const Dashboard = () => {
                             </select>
                           </td>
                           <td className="px-4 py-2 border">
-                            download file / download img
+                            <CSVLink data={[campaignArr.campaigns[index]]}>
+                              Export data
+                            </CSVLink>{" "}
+                            /{" "}
+                            <ImageDownloadButton
+                              imageUrl={campaign.imageUrl}
+                              fileName={"Campaign Picture"}
+                            />
                           </td>
                           <td className="px-4 py-2 border">
                             <button
@@ -168,7 +179,10 @@ const Dashboard = () => {
                             {campaign.CampaignStatus}
                           </td>
                           <td className="px-4 py-2 border">
-                            download file /{" "}
+                            <CSVLink data={[campaignArr.campaigns[index]]}>
+                              Export data
+                            </CSVLink>{" "}
+                            /{" "}
                             <ImageDownloadButton
                               imageUrl={campaign.imageUrl}
                               fileName={"Campaign Picture"}

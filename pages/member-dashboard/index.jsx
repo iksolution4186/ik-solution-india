@@ -11,6 +11,8 @@ import {
 } from "firebase/firestore";
 import Link from "next/link";
 import Loading from "@/components/Loading";
+import ImageDownloadButton from "@/components/ImageDownloadImage";
+import { CSVLink } from "react-csv";
 
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -93,7 +95,7 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {campaigns?.campaigns?.map((campaign) => (
+                {campaigns?.campaigns?.map((campaign, index) => (
                   <tr key={campaign}>
                     <td className="px-4 py-2 border">
                       {" "}
@@ -105,7 +107,14 @@ const Dashboard = () => {
                       {campaign.CampaignStatus}
                     </td>
                     <td className="px-4 py-2 border">
-                      download file / download img
+                      <CSVLink data={[campaigns.campaigns[index]]}>
+                        Export data
+                      </CSVLink>{" "}
+                      /{" "}
+                      <ImageDownloadButton
+                        imageUrl={campaign.imageUrl}
+                        fileName={"Campaign Picture"}
+                      />
                     </td>
                   </tr>
                 ))}
