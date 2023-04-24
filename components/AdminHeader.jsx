@@ -51,7 +51,7 @@ const Header = () => {
     setHovered(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [path]);
-
+  // This is a change
   return (
     <div className="fixed top-0 z-10 w-full h-20 bg-secondary">
       <header className=" flex justify-between w-full h-20 px-16 md:p-8 lg:px-8 bg-secondary text-tertiary md:items-center sm:px-4 m-auto max-w-[1535px]  ">
