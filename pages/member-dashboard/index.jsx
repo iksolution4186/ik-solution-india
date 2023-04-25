@@ -65,62 +65,66 @@ const Dashboard = () => {
       {!campaigns && !userData ? (
         <Loading />
       ) : (
-        <div className="container mx-auto mt-32 mb-10 w-fit">
-          <h2 className="mb-4 text-2xl font-medium text-center">
-            Member Dashboard
-          </h2>
-          <div className="text-center">
-            <Link href="/member-dashboard/wapp-send">Add New Campaigns</Link>
-          </div>
+        <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
+          <div className="container pt-32 pb-10 mx-auto w-fit ">
+            <h2 className="mb-4 text-2xl font-medium text-center">
+              Member Dashboard
+            </h2>
+            <div className="text-center">
+              <Link href="/member-dashboard/wapp-send">Add New Campaigns</Link>
+            </div>
 
-          <div className="overflow-x-scroll mt-10  w-[95vw]">
-            <table className="w-full ">
-              <caption className="py-5 mb-4 text-2xl font-bold border border-secondary">
-                Your Whatsapp balance is - {userData?.WhatsAppBalance}
-                {"  "}{" "}
-                <Link
-                  href={"/member-dashboard/request-messages"}
-                  className="font-normal"
-                >
-                  Request More Messages
-                </Link>
-              </caption>
-              <thead>
-                <tr>
-                  <th className="px-4 py-2">Date</th>
-                  <th className="px-4 py-2">Caption</th>
-                  <th className="px-4 py-2">Total Message</th>
-                  <th className="px-4 py-2">Campaign Status</th>
-                  <th className="px-4 py-2">Download Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                {campaigns?.campaigns?.map((campaign, index) => (
-                  <tr key={campaign}>
-                    <td className="px-4 py-2 border">
-                      {" "}
-                      {campaign.RegisteredDate}
-                    </td>
-                    <td className="px-4 py-2 border">{campaign.title}</td>
-                    <td className="px-4 py-2 border">{campaign.Messages}</td>
-                    <td className="px-4 py-2 border">
-                      {campaign.CampaignStatus}
-                    </td>
-                    <td className="px-4 py-2 border">
-                      <CSVLink data={[campaigns.campaigns[index]]}>
-                        Export data
-                      </CSVLink>{" "}
-                      /{" "}
-                      <ImageDownloadButton
-                        imageUrl={campaign.imageUrl}
-                        fileName={"Campaign Picture"}
-                      />
-                    </td>
+            <div className="overflow-x-scroll mt-10  w-[95vw]">
+              <table className="w-full ">
+                <caption className="py-5 mb-4 text-2xl font-bold border border-secondary">
+                  Your Whatsapp balance is - {userData?.WhatsAppBalance}
+                  {"  "}{" "}
+                  <Link
+                    href={"/member-dashboard/request-messages"}
+                    className="font-normal"
+                  >
+                    Request More Messages
+                  </Link>
+                </caption>
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2">Date</th>
+                    <th className="px-4 py-2">Caption</th>
+                    <th className="px-4 py-2">Total Message</th>
+                    <th className="px-4 py-2">Campaign Status</th>
+                    <th className="px-4 py-2">Download Details</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {campaigns?.campaigns?.map((campaign, index) => (
+                    <tr key={campaign}>
+                      <td className="px-4 py-2 border">
+                        {" "}
+                        {campaign.RegisteredDate}
+                      </td>
+                      <td className="px-4 py-2 border">{campaign.title}</td>
+                      <td className="px-4 py-2 border">{campaign.Messages}</td>
+                      <td className="px-4 py-2 border">
+                        {campaign.CampaignStatus}
+                      </td>
+                      <td className="px-4 py-2 border">
+                        <CSVLink
+                          data={[campaigns.campaigns[index]]}
+                          className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+                        >
+                          Export data
+                        </CSVLink>{" "}
+                        <ImageDownloadButton
+                          imageUrl={campaign.imageUrl}
+                          fileName={"Campaign Picture"}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>{" "}
         </div>
       )}
     </>

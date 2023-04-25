@@ -85,88 +85,96 @@ const OrderForm = () => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className="max-w-md mx-auto mt-32 mb-4">
-      <div className="mb-4">
-        <label htmlFor="name" className="block mb-2 font-bold text-gray-700">
-          Name:
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="email" className="block mb-2 font-bold text-gray-700">
-          Email:
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="phone" className="block mb-2 font-bold text-gray-700">
-          Phone Number:
-        </label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          value={phone}
-          onChange={(event) => setPhone(event.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label
-          htmlFor="messageCount"
-          className="block mb-2 font-bold text-gray-700"
-        >
-          Message Count:
-        </label>
-        <input
-          type="number"
-          id="messageCount"
-          name="messageCount"
-          value={messageCount}
-          onChange={(event) => setMessageCount(parseInt(event.target.value))}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="notes" className="block mb-2 font-bold text-gray-700">
-          Additional Notes/Instructions:
-        </label>
-        <textarea
-          id="notes"
-          name="notes"
-          value={notes}
-          onChange={(event) => setNotes(event.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
-        ></textarea>
-      </div>
+    <div className="bg-gradient-to-l from-primary to-tertiary">
+      <form
+        onSubmit={handleFormSubmit}
+        className="max-w-md pt-24 pb-32 mx-auto "
+      >
+        <caption className="block mb-4 text-3xl font-bold ">
+          Order Messages
+        </caption>
+        <div className="mb-4">
+          <label htmlFor="name" className="block mb-2 font-bold text-gray-700">
+            Name:
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block mb-2 font-bold text-gray-700">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="phone" className="block mb-2 font-bold text-gray-700">
+            Phone Number:
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="messageCount"
+            className="block mb-2 font-bold text-gray-700"
+          >
+            Message Count:
+          </label>
+          <input
+            type="number"
+            id="messageCount"
+            name="messageCount"
+            value={messageCount}
+            onChange={(event) => setMessageCount(parseInt(event.target.value))}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="notes" className="block mb-2 font-bold text-gray-700">
+            Additional Notes/Instructions:
+          </label>
+          <textarea
+            id="notes"
+            name="notes"
+            value={notes}
+            onChange={(event) => setNotes(event.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
+          ></textarea>
+        </div>
 
-      <div className="flex justify-center">
-        <button
-          type="submit"
-          className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-        >
-          Place Order
-        </button>
-      </div>
-    </form>
+        <div className="flex">
+          <button
+            type="submit"
+            className="p-3 transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+          >
+            Place Order
+          </button>
+        </div>
+      </form>{" "}
+    </div>
   );
 };
 

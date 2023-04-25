@@ -30,16 +30,18 @@ const Orders = () => {
   }
 
   return (
-    <div className="container px-4 py-4 mx-auto mt-24">
-      <h1 className="mb-4 text-2xl font-bold">Orders</h1>
-      <div className="grid grid-cols-3 gap-4">
+    <div className="container min-h-screen px-4 py-4 pt-24 mx-auto bg-gradient-to-l from-primary to-tertiary">
+      <h1 className="mb-4 text-3xl font-bold text-center">Your Orders</h1>
+      <div className="grid grid-cols-3 gap-4 ">
         {orders?.map((order) => (
-          <div key={order} className="p-4 bg-white shadow-md">
-            <p className="text-gray-500">Order ID: {order.id}</p>
-            <p className="text-lg font-bold">Product: WhatsApp package</p>
-            <p className="text-gray-500">Quantity: {order.messageCount}</p>
-            <p className="text-gray-500">Price: ₹{order.price}</p>
-            <p className="text-gray-500">Status: {order.status}</p>
+          <div key={order} className="p-4 bg-black rounded shadow-md">
+            <p className="text-gray-200">Order ID: {order.id}</p>
+            <p className="text-lg text-white ">
+              Product: <span className="font-bold"> WhatsApp package</span>
+            </p>
+            <p className="text-gray-200">Quantity: {order.messageCount}</p>
+            <p className="text-gray-200">Price: ₹{order.price}</p>
+            <p className="text-primary">Status: {order.status}</p>
           </div>
         ))}
       </div>

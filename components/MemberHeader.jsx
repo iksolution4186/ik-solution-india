@@ -94,7 +94,15 @@ const Header = () => {
                 href={"/member-dashboard/request-messages"}
                 className={"hover:text-primary h-full flex items-center"}
               >
-                Buy
+                Buy Messages
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={"/member-dashboard/wapp-send"}
+                className={"hover:text-primary h-full flex items-center"}
+              >
+                Add Campaign
               </Link>
             </li>
             <li>

@@ -110,96 +110,105 @@ const Form = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-lg min-h-screen mx-auto mt-24 mb-32"
-    >
-      <div className="mb-4">
-        <label htmlFor="title" className="block mb-2 font-bold text-gray-700">
-          Title
-        </label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label
-          htmlFor="mobile-numbers"
-          className="block mb-2 font-bold text-gray-700"
-        >
-          Mobile Numbers
-        </label>
-        <textarea
-          id="mobile-numbers"
-          value={mobileNumbers}
-          onChange={(e) => setMobileNumbers(e.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          required
-          rows={"10"}
-          placeholder="Enter Mobile Numbers like
-          8872960014 
-          7973994038
-          9888610086"
-        />
-        <p>Message Count :- {numLines}</p>
-      </div>
-      <div className="mb-4">
-        <label htmlFor="url" className="block mb-2 font-bold text-gray-700">
-          URL
-        </label>
-        <input
-          type="text"
-          id="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label
-          htmlFor="description"
-          className="block mb-2 font-bold text-gray-700"
-        >
-          Description
-        </label>
-        <textarea
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="image" className="block mb-2 font-bold text-gray-700">
-          Image
-        </label>
-        <input
-          type="file"
-          id="image"
-          onChange={handleImageChange}
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus :shadow-outline"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <progress value={progress} max="100" className="w-full"></progress>
-      </div>
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+    <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-md min-h-screen pt-24 pb-32 mx-auto "
+      >
+        <caption className="block mb-4 text-3xl font-bold ">
+          Add Campaign
+        </caption>
+        <div className="mb-4">
+          <label htmlFor="title" className="block mb-2 font-bold text-gray-700">
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="mobile-numbers"
+            className="flex gap-4 mb-2 font-bold text-gray-700"
+          >
+            Mobile Numbers{" "}
+            <p className="text-black">(Message Count :- {numLines})</p>
+          </label>
+          <textarea
+            id="mobile-numbers"
+            value={mobileNumbers}
+            onChange={(e) => setMobileNumbers(e.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            required
+            rows={"10"}
+            placeholder={`Enter Mobile Numbers like :- \n
+         \t\t\t\t\t\t\t\t\t\t 8872960014 
+         \t\t\t\t\t\t\t\t\t\t 7973994038
+         \t\t\t\t\t\t\t\t\t\t 9888610086
+         \t\t\t\t\t\t\t\t\t\t 9888610086
+         \t\t\t\t\t\t\t\t\t\t ...
+         \t\t\t\t\t\t\t\t\t\t ...
+         `}
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="url" className="block mb-2 font-bold text-gray-700">
+            URL To Send (Optional)
+          </label>
+          <input
+            type="text"
+            id="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="description"
+            className="block mb-2 font-bold text-gray-700"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="image" className="block mb-2 font-bold text-gray-700">
+            Image
+          </label>
+          <input
+            type="file"
+            id="image"
+            onChange={handleImageChange}
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus :shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <progress value={progress} max="100" className="w-full"></progress>
+        </div>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="p-3 transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+          >
+            Submit
+          </button>
+        </div>
+      </form>{" "}
+    </div>
   );
 };
 export default Form;

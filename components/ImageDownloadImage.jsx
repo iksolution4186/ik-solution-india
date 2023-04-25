@@ -3,13 +3,6 @@ import React from "react";
 function ImageDownloadButton({ imageUrl, fileName }) {
   const handleDownload = async () => {
     try {
-      // const xhr = new XMLHttpRequest();
-      // xhr.responseType = "blob";
-      // xhr.onload = (event) => {
-      //   const blob = xhr.response;
-      // };
-      // xhr.open("GET", imageUrl);
-      // xhr.send();
       const link = document.createElement("a");
       link.href = imageUrl;
       link.setAttribute("download", "");
@@ -22,7 +15,14 @@ function ImageDownloadButton({ imageUrl, fileName }) {
     }
   };
 
-  return <button onClick={handleDownload}>Download Image</button>;
+  return (
+    <button
+      onClick={handleDownload}
+      className="p-[5px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+    >
+      Download Image
+    </button>
+  );
 }
 
 export default ImageDownloadButton;
