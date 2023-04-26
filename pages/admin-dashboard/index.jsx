@@ -22,6 +22,7 @@ const Dashboard = () => {
     const collectionRef = collection(db, "users");
     if (!user) {
       router.push("/login");
+      return;
     }
     console.log(user);
     if (user?.email === "mkg@admin.in") {

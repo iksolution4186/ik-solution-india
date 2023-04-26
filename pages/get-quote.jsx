@@ -67,14 +67,17 @@ const Quote = () => {
           make your business better stand out.
         </p>
       </div>
-      <div className="flex flex-col flex-1 w-10/12 gap-3 m-auto my-8 mt-8 px-44 lg:px-8 xl:px-24 md:px-4 md:py-8 sm:w-full md:w-10/12 quote_form">
+      <div className="flex flex-col flex-1 w-10/12 gap-3 m-auto my-8 mt-8 px-44 lg:px-8 xl:px-24 md:px-4 md:py-8 sm:w-full md:w-10/12 quote_form ">
         <h2 className="text-3xl font-bold">
           Please tell us about your project details
         </h2>
         <p>
           Give us the detail and we will change your imagination to reality{" "}
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3 p-4 bg-white rounded-lg shadow-md"
+        >
           <label htmlFor="project-name " className="flex flex-col gap-2">
             Project Name
             <input
@@ -96,7 +99,7 @@ const Quote = () => {
               id="project-budget"
               required
               className="p-2 border border-gray-300"
-              placeholder="e.g. $3000"
+              placeholder="e.g. ₹10000"
               value={projectBudget}
               onChange={(e) => setProjectBudget(e.target.value)}
             />

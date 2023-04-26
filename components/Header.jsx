@@ -29,6 +29,7 @@ const Header = () => {
       })
       .catch((error) => {
         // An error happened.
+        alert(error.message);
       });
   }
   useEffect(() => {
@@ -227,6 +228,29 @@ const Header = () => {
                 >
                   Log In
                 </Link>
+              )}
+            </li>
+            <li className="flex items-center ">
+              {user?.email == "mkg@admin.in" ? (
+                <Link
+                  className={
+                    " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+                  }
+                  href={"/admin-dashboard"}
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                user && (
+                  <Link
+                    className={
+                      " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+                    }
+                    href={"/member-dashboard"}
+                  >
+                    Dashboard
+                  </Link>
+                )
               )}
             </li>
           </ul>

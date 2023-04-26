@@ -1,15 +1,32 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { collection, getDocs, getDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase.config"; // import your Firebase config file here
 import Loading from "@/components/Loading";
 import Link from "next/link";
+import { MyContext } from "@/assets/userContext";
+import { useRouter } from "next/router";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(null);
-
+  const user = useContext(MyContext);
+  const router = useRouter();
   useEffect(() => {
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+    console.log(user);
+    if (user?.email === "mkg@admin.in") {
+      console.log("Welcome Admin");
+    } else {
+      router.push("/login");
+      console.log("else");
+      setTimeout(() => {
+        alert("unauthorised");
+      }, 2000);
+    }
     const fetchOrders = async () => {
       const ordersCollection = collection(db, "orders");
       const ordersSnapshot = await getDocs(ordersCollection);

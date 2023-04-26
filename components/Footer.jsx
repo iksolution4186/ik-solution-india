@@ -124,8 +124,10 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="Quick Message md:row-start-1 md:row-end-2 md:col-start-2 md:col-end-3 sm:col-auto">
-          <strong className="text-lg font-medium ">Quick Message</strong>
+        <div className="p-4 bg-white rounded-lg shadow-md Quick Message md:row-start-1 md:row-end-2 md:col-start-2 md:col-end-3 sm:col-auto">
+          <strong className="text-lg font-medium text-black ">
+            Quick Message
+          </strong>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-3 pt-5 text-black sm:max-w-xs"
@@ -133,7 +135,7 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Email"
-              className="p-2"
+              className="p-2 border border-black rounded"
               value={email}
               required
               onChange={(e) => setEmail(e.target.value)}
@@ -144,14 +146,14 @@ const Footer = () => {
               value={message}
               cols={10}
               rows={4}
-              placeholder="Message"
-              className="p-2"
+              placeholder="Message "
+              className="p-2 border border-black rounded"
               required
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
             <button
               type="submit"
-              className="w-32 p-2 transition-all duration-300 border rounded text-tertiary hover:text-secondary hover:bg-primary"
+              className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
             >
               Send
             </button>

@@ -24,7 +24,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        alert("signed out");
+        // alert("signed out");
         router.push("/login");
       })
       .catch((error) => {

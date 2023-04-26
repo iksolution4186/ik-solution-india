@@ -49,7 +49,7 @@ const Contact = () => {
       <div className="flex-1 left_section md:w-[90vw]  sm:w-full h-full">
         <Image src={logo} alt="company logo" className="w-full h-full" />
       </div>
-      <div className="flex-1 right_section md:w-[90vw] sm:w-full ">
+      <div className="flex-1 right_section md:w-[90vw] sm:w-full bg-white rounded-lg shadow-md p-4">
         <form
           className="flex flex-col gap-4 px-4 py-8 md:p-0"
           onSubmit={handleSubmit}
