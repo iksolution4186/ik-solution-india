@@ -4,9 +4,11 @@ import { auth } from "../firebase.config.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link.js";
 import { MyContext } from "@/assets/userContext.js";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const LoginPage = () => {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -36,14 +38,14 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8">
+      <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8 bg-gradient-to-l from-primary to-tertiary">
+        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
           <div>
             <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-              Log in to your account
+              Log In
             </h2>
           </div>
-          <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+          <form className="mt-8 space-y-6 " onSubmit={handleLogin}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
@@ -62,14 +64,14 @@ const LoginPage = () => {
                   onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   required
                   className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
@@ -77,6 +79,12 @@ const LoginPage = () => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-5 top-[25%] text-[1.2rem]"
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </button>
               </div>
             </div>
 
@@ -108,36 +116,10 @@ const LoginPage = () => {
               </div>
             )}
 
-            {/* <div className="flex items-center justify-between mt-6">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="block ml-2 text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-            </div> */}
-
             <div>
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-secondary group hover:text-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border rounded-md bg-secondary group hover:text-secondary hover:bg-gradient-to-l from-primary to-tertiary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
@@ -157,9 +139,23 @@ const LoginPage = () => {
                 Sign in
               </button>
             </div>
-            <div>
+            <div className="flex justify-between gap-4">
               <p>
-                Not a member? <Link href={"/signup"}>Sign Up</Link>{" "}
+                Not a member?{" "}
+                <Link
+                  href={"/signup"}
+                  className="font-bold underline hover:opacity-80"
+                >
+                  Sign Up
+                </Link>{" "}
+              </p>
+              <p className="">
+                <Link
+                  href="/password-reset"
+                  className="font-medium hover:opacity-80"
+                >
+                  Forgot your password?
+                </Link>
               </p>
             </div>
           </form>

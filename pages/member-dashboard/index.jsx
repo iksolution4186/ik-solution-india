@@ -37,7 +37,7 @@ const Dashboard = () => {
         if (docSnap.exists() || userSnap.exists()) {
           console.log("Document data:", docSnap.data());
           setCampaigns(docSnap.data());
-          console.log(userSnap.data());
+          console.log(docSnap.data());
           setUserData(userSnap.data());
         } else {
           // docSnap.data() will be undefined in this case
@@ -76,9 +76,9 @@ const Dashboard = () => {
                 <caption className="mb-16">
                   <div className="max-w-lg px-4 py-6 mx-auto bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary ">
                     <div className="flex items-center justify-between mb-4 text-center">
-                      <p className="w-full text-gray-900 ">
+                      <p className="w-full font-bold text-gray-900 ">
                         Your Whatsapp balance is -{" "}
-                        <span className="font-bold">
+                        <span className="text-[1.2rem] text-black">
                           {" "}
                           {userData?.WhatsAppBalance}
                         </span>
@@ -114,33 +114,45 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {campaigns?.campaigns?.map((campaign, index) => (
-                    <tr key={campaign}>
-                      <td className="px-4 py-2 border">
-                        {" "}
-                        {campaign.RegisteredDate}
-                      </td>
-                      <td className="px-4 py-2 capitalize border">
-                        {campaign.title}
-                      </td>
-                      <td className="px-4 py-2 border">{campaign.Messages}</td>
-                      <td className="px-4 py-2 font-bold capitalize border">
-                        {campaign.CampaignStatus}
-                      </td>
-                      <td className="flex gap-4 px-4 py-2 border">
-                        <CSVLink
-                          data={[campaigns.campaigns[index]]}
-                          className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
-                        >
-                          Export data
-                        </CSVLink>{" "}
-                        <ImageDownloadButton
-                          imageUrl={campaign.imageUrl}
-                          fileName={"Campaign Picture"}
-                        />
-                      </td>
-                    </tr>
-                  ))}
+                  {!campaigns ? (
+                    <div className="absolute flex items-center justify-center w-full text-center h-[100px]">
+                      <strong className="p-2 text-2xl rounded">
+                        No Campaigns
+                      </strong>
+                    </div>
+                  ) : (
+                    <>
+                      {campaigns?.campaigns?.map((campaign, index) => (
+                        <tr key={campaign}>
+                          <td className="px-4 py-2 border">
+                            {" "}
+                            {campaign.RegisteredDate}
+                          </td>
+                          <td className="px-4 py-2 capitalize border">
+                            {campaign.title}
+                          </td>
+                          <td className="px-4 py-2 border">
+                            {campaign.Messages}
+                          </td>
+                          <td className="px-4 py-2 font-bold capitalize border">
+                            {campaign.CampaignStatus}
+                          </td>
+                          <td className="flex gap-4 px-4 py-2 border">
+                            <CSVLink
+                              data={[campaigns.campaigns[index]]}
+                              className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+                            >
+                              Export data
+                            </CSVLink>{" "}
+                            <ImageDownloadButton
+                              imageUrl={campaign.imageUrl}
+                              fileName={"Campaign Picture"}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </>
+                  )}
                 </tbody>
               </table>
             </div>

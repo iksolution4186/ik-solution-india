@@ -27,7 +27,7 @@ const AccountDataDisplay = () => {
                 {userData.name}&apos;s Account
               </h2>
               <p className="text-gray-600">
-                Registered on {userData.registrationDate}
+                Registered on {userData.RegisteredDate}
               </p>
             </div>
             <div className="py-4 border-t border-b border-gray-200">

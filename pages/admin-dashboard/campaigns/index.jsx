@@ -24,22 +24,13 @@ const Dashboard = () => {
   const user = useContext(MyContext);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const arr = [
-    {
-      name: "karan",
-      class: "3rd",
-    },
-    {
-      name: "karan",
-      class: "3rd",
-    },
-  ];
+
   useEffect(() => {
     const collectionRef = collection(db, "wapps");
     if (!user) {
       router.push("/login");
     }
-    console.log(user, "from campaingns");
+
     if (user?.email == "mkg@admin.in") {
       console.log("Welcome Admin");
     } else {

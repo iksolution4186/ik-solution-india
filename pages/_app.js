@@ -11,11 +11,13 @@ import Loading from "@/components/Loading.jsx";
 import AdminHeader from "@/components/AdminHeader.jsx";
 import DashboardFooter from "@/components/DashboardFooter.jsx";
 import MemberHeader from "@/components/MemberHeader.jsx";
+import { AiOutlineWhatsApp } from "react-icons/ai";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const hideHeaderFooter = router.pathname === "/get-quote";
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
   const AdminHeaderPages = [
     "/admin-dashboard",
     "/admin-dashboard/member/[userId]",
@@ -73,6 +75,13 @@ export default function App({ Component, pageProps }) {
           {showAdminHeader && <AdminHeader />}
           {showMemberHeader && <MemberHeader />}
           <Component {...pageProps} />
+          <a
+            href="https://wa.me/+918360474290"
+            target={"_blank"}
+            className="fixed p-2 text-white bg-green-500 border rounded-full cursor-pointer bottom-12 right-8 md:bottom-6 md:right-4"
+          >
+            <AiOutlineWhatsApp id="whatsapp__icon" className="text-4xl" />
+          </a>
           {!hideHeaderFooter && !showAdminHeader && !showMemberHeader && (
             <Footer />
           )}

@@ -80,10 +80,10 @@ export default function AddProductForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
+    <div className="min-h-screen pt-32 pb-10 bg-gradient-to-l from-primary to-tertiary">
       <form
         onSubmit={handleFormSubmit}
-        className="w-64 max-w-md pt-32 pb-10 m-auto"
+        className="w-64 p-8 m-auto bg-white rounded-lg shadow-md min-w-[300px]"
       >
         <caption className="block mb-4 font-bold text-[1.3rem]">
           Add New Product

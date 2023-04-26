@@ -85,10 +85,10 @@ const OrderForm = () => {
   };
 
   return (
-    <div className="bg-gradient-to-l from-primary to-tertiary">
+    <div className="pt-32 pb-24 bg-gradient-to-l from-primary to-tertiary ">
       <form
         onSubmit={handleFormSubmit}
-        className="max-w-md pt-24 pb-32 mx-auto "
+        className="max-w-md p-8 mx-auto bg-white rounded-lg shadow-md"
       >
         <caption className="block mb-4 text-3xl font-bold ">
           Order Messages

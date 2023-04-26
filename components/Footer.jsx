@@ -47,9 +47,14 @@ const Footer = () => {
         <div className="contact_us ">
           <strong className="text-lg font-medium">Contact Us</strong>
           <ul className="flex flex-col gap-3 pt-5">
-            <li>Address: 6214 Portal Way, Unit G2 Ferndale, WA 98248 USA</li>
-            <li>Email: support@iksolutionusa.com</li>
-            <li>Tel: 564-209-9696</li>
+            <li>
+              Address: Parmar Colony, Distt, near Giyan Hospital, Garhshankar,
+              Punjab 144527
+            </li>
+            <li>Email: iksolution4186@gmail.com</li>
+            <li>Tel: +91 83604-74290</li>
+            <li>Tel: +91 79739-94038</li>
+            <li>Tel: 01884501838</li>
           </ul>
         </div>
         <div className="services">

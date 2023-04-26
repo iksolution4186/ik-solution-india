@@ -5,12 +5,14 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const router = useRouter();
@@ -64,9 +66,7 @@ const SignUpPage = () => {
       setPhone("");
       setPassword("");
       setConfirmPassword("");
-      alert(
-        "User signed up successfully, Please log in with these credentials"
-      );
+      alert("User signed up successfully");
       router.push("/member-dashboard");
     } catch (error) {
       alert(error.message);
@@ -79,8 +79,8 @@ const SignUpPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-100 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8">
+      <div className="flex items-center justify-center min-h-screen px-4 pt-24 pb-12 bg-gray-100 bg-gradient-to-l from-primary to-tertiary sm:px-6 lg:px-8">
+        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
           <div>
             <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
               Sign Up
@@ -136,14 +136,14 @@ const SignUpPage = () => {
                   onChange={(event) => setPhone(event.target.value)}
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
                   required
                   className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
@@ -151,6 +151,12 @@ const SignUpPage = () => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
+                <button
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-5 top-[25%] text-[1.2rem]"
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </button>
               </div>
               <div>
                 <label htmlFor="confirm-password" className="sr-only">
@@ -173,7 +179,7 @@ const SignUpPage = () => {
             <div>
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md bg-secondary group hover:text-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border rounded-md bg-secondary group hover:text-secondary hover:bg-gradient-to-l from-primary to-tertiary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
@@ -195,7 +201,13 @@ const SignUpPage = () => {
             </div>
             <div>
               <p>
-                Already a member? <Link href={"/login"}>Log In</Link>{" "}
+                Already a member?{" "}
+                <Link
+                  href={"/login"}
+                  className="font-bold underline hover:opacity-50"
+                >
+                  Log In
+                </Link>{" "}
               </p>
             </div>
           </form>
