@@ -32,6 +32,10 @@ const User = (props) => {
             <p className="text-gray-800">{props.email}</p>
           </div>
           <div className="flex items-center justify-between mb-2">
+            <p className="text-gray-600">Password</p>
+            <p className="text-gray-800">{props.password}</p>
+          </div>
+          <div className="flex items-center justify-between mb-2">
             <p className="text-gray-600">Phone Number</p>
             <p className="text-gray-800">{props.phone}</p>
           </div>

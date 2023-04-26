@@ -38,6 +38,7 @@ const SignUpPage = () => {
       name,
       email,
       phone,
+      password,
       status: true,
       RegisteredDate: day + "/" + month + "/" + year,
       WhatsAppBalance: 0,
@@ -98,7 +99,7 @@ const SignUpPage = () => {
                   type="text"
                   autoComplete="name"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm"
                   placeholder="Name"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -114,7 +115,7 @@ const SignUpPage = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm"
                   placeholder="Email address"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -130,7 +131,7 @@ const SignUpPage = () => {
                   type="tel"
                   autoComplete="tel"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm"
                   placeholder="Phone number"
                   value={phone}
                   onChange={(event) => setPhone(event.target.value)}
@@ -146,7 +147,7 @@ const SignUpPage = () => {
                   type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm"
                   placeholder="Password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
@@ -168,7 +169,7 @@ const SignUpPage = () => {
                   type="password"
                   autoComplete="new-password"
                   required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm"
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}

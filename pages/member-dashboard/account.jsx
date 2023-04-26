@@ -9,7 +9,7 @@ const AccountDataDisplay = () => {
 
   useEffect(() => {
     async function fetchUserData() {
-      const userDocRef = doc(db, "users", user.uid);
+      const userDocRef = doc(db, "users", user?.uid);
       const userDoc = await getDoc(userDocRef);
       setUserData(userDoc.data());
     }
