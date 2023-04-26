@@ -24,8 +24,8 @@ const Dashboard = () => {
   console.log(user);
 
   useEffect(() => {
-    const docRef = doc(db, "wapps", user.uid);
-    const userRef = doc(db, "users", user.uid);
+    const docRef = doc(db, "wapps", user?.uid);
+    const userRef = doc(db, "users", user?.uid);
     console.log(user);
     if (!user) {
       router.push("/login");
@@ -66,7 +66,7 @@ const Dashboard = () => {
         <Loading />
       ) : (
         <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary xlmin:m-auto max-w-[1535px]">
-          <div className="container pt-32 pb-10 mx-auto w-fit ">
+          <div className="container w-full pt-32 pb-10 mx-auto ">
             <h2 className="mb-4 text-2xl font-medium text-center">
               Member Dashboard
             </h2>

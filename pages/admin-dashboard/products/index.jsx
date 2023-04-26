@@ -52,7 +52,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
-      <div className="container pt-32 pb-10 mx-auto w-fit">
+      <div className="container w-full pt-32 pb-10 mx-auto">
         <h2 className="mb-4 text-2xl font-medium text-center">
           Admin Dashboard
         </h2>

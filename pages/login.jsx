@@ -38,8 +38,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8 bg-gradient-to-l from-primary to-tertiary">
-        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+      <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-l from-primary to-tertiary">
+        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md sm:max-w-auto sm:w-[100vw] sm:p-4">
           <div>
             <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
               Log In
