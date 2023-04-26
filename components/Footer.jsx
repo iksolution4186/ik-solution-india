@@ -135,7 +135,7 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Email"
-              className="p-2 border border-black rounded"
+              className="p-2 border border-gray-300 rounded"
               value={email}
               required
               onChange={(e) => setEmail(e.target.value)}
@@ -147,7 +147,7 @@ const Footer = () => {
               cols={10}
               rows={4}
               placeholder="Message "
-              className="p-2 border border-black rounded"
+              className="p-2 border border-gray-300 rounded"
               required
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
