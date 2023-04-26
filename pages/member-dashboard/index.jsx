@@ -50,41 +50,59 @@ const Dashboard = () => {
     getDocument();
   }, []);
 
-  const deleteUser = async (id) => {
-    const userRef = doc(collection(db, "products"), id);
-    await deleteDoc(userRef);
-  };
-  const updateUser = async (id, updatedUser) => {
-    const userRef = doc(collection(db, "products"), id);
-    await updateDoc(userRef, updatedUser);
-    setEditingUser(null);
-  };
+  // const deleteUser = async (id) => {
+  //   const userRef = doc(collection(db, "products"), id);
+  //   await deleteDoc(userRef);
+  // };
+  // const updateUser = async (id, updatedUser) => {
+  //   const userRef = doc(collection(db, "products"), id);
+  //   await updateDoc(userRef, updatedUser);
+  //   setEditingUser(null);
+  // };
 
   return (
     <>
       {!campaigns && !userData ? (
         <Loading />
       ) : (
-        <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
+        <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary xlmin:m-auto max-w-[1535px]">
           <div className="container pt-32 pb-10 mx-auto w-fit ">
             <h2 className="mb-4 text-2xl font-medium text-center">
               Member Dashboard
             </h2>
-            <div className="text-center">
-              <Link href="/member-dashboard/wapp-send">Add New Campaigns</Link>
-            </div>
 
             <div className="overflow-x-scroll mt-10  w-[95vw]">
               <table className="w-full ">
-                <caption className="py-5 mb-4 text-2xl font-bold border border-secondary">
-                  Your Whatsapp balance is - {userData?.WhatsAppBalance}
-                  {"  "}{" "}
-                  <Link
-                    href={"/member-dashboard/request-messages"}
-                    className="font-normal"
-                  >
-                    Request More Messages
-                  </Link>
+                <caption className="mb-16">
+                  <div className="max-w-lg px-4 py-6 mx-auto bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary ">
+                    <div className="flex items-center justify-between mb-4 text-center">
+                      <p className="w-full text-gray-900 ">
+                        Your Whatsapp balance is -{" "}
+                        <span className="font-bold">
+                          {" "}
+                          {userData?.WhatsAppBalance}
+                        </span>
+                      </p>
+                    </div>
+                    <div className="py-4 border-t border-b border-gray-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <Link
+                          href={"/member-dashboard/request-messages"}
+                          className="p-[5px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+                        >
+                          Request More Messages
+                        </Link>
+                        <div>
+                          <Link
+                            href="/member-dashboard/wapp-send"
+                            className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+                          >
+                            Add New Campaigns
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </caption>
                 <thead>
                   <tr>
@@ -102,12 +120,14 @@ const Dashboard = () => {
                         {" "}
                         {campaign.RegisteredDate}
                       </td>
-                      <td className="px-4 py-2 border">{campaign.title}</td>
+                      <td className="px-4 py-2 capitalize border">
+                        {campaign.title}
+                      </td>
                       <td className="px-4 py-2 border">{campaign.Messages}</td>
-                      <td className="px-4 py-2 border">
+                      <td className="px-4 py-2 font-bold capitalize border">
                         {campaign.CampaignStatus}
                       </td>
-                      <td className="px-4 py-2 border">
+                      <td className="flex gap-4 px-4 py-2 border">
                         <CSVLink
                           data={[campaigns.campaigns[index]]}
                           className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"

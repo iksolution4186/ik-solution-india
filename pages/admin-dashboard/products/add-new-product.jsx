@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
 
@@ -36,8 +36,26 @@ export default function AddProductForm() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  function generateRegistrationId() {
+    // Generate a random 6-digit number between 100000 and 999999
+    return Math.floor(Math.random() * 9000000000) + 1000000000;
+  }
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    let uid = generateRegistrationId().toString();
+    let docRef = doc(db, "orders", uid);
+    let docSnap = await getDoc(docRef);
+
+    while (docSnap.exists()) {
+      uid = generateRegistrationId().toString();
+      docRef = doc(db, "orders", uid);
+      docSnap = await getDoc(docRef);
+    }
+    handleDataSubmission(uid);
+  }
+
+  const handleDataSubmission = async (uid) => {
     setLoading(true);
 
     // Upload image to Firebase Storage
@@ -48,9 +66,9 @@ export default function AddProductForm() {
     const downloadURL = await getDownloadURL(storageRef);
 
     // Add product to Firestore
-    const productRef = doc(db, "products", name);
+    const productRef = doc(db, "products", uid);
     const newProduct = {
-      id: name,
+      id: uid,
       name,
       price,
       image: downloadURL,
@@ -62,52 +80,60 @@ export default function AddProductForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mx-5 mt-32 mb-10">
-      <div className="mb-4">
-        <label className="block mb-2 font-bold text-gray-700" htmlFor="name">
-          Name
-        </label>
-        <input
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          id="name"
-          type="text"
-          placeholder="Enter product name"
-          value={name}
-          onChange={handleNameChange}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block mb-2 font-bold text-gray-700" htmlFor="price">
-          Price
-        </label>
-        <input
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          id="price"
-          type="text"
-          placeholder="Enter product price"
-          value={price}
-          onChange={handlePriceChange}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block mb-2 font-bold text-gray-700" htmlFor="image">
-          Image
-        </label>
-        <input
-          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-          id="image"
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
-      </div>
-      <button
-        className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-        type="submit"
-        disabled={loading}
+    <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
+      <form
+        onSubmit={handleFormSubmit}
+        className="w-64 max-w-md pt-32 pb-10 m-auto"
       >
-        {loading ? "Adding..." : "Add"}
-      </button>
-    </form>
+        <caption className="block mb-4 font-bold text-[1.3rem]">
+          Add New Product
+        </caption>
+        <div className="mb-4">
+          <label className="block mb-2 font-bold text-gray-700" htmlFor="name">
+            Product Name
+          </label>
+          <input
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            id="name"
+            type="text"
+            placeholder="Enter product name"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 font-bold text-gray-700" htmlFor="price">
+            Product Price
+          </label>
+          <input
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            id="price"
+            type="text"
+            placeholder="Enter product price"
+            value={price}
+            onChange={handlePriceChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 font-bold text-gray-700" htmlFor="image">
+            Product Image
+          </label>
+          <input
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </div>
+        <button
+          className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? "Adding..." : "Add"}
+        </button>
+      </form>{" "}
+    </div>
   );
 }

@@ -23,7 +23,9 @@ const AccountDataDisplay = () => {
         {userData && (
           <>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold">{userData.name}'s Account</h2>
+              <h2 className="text-2xl font-bold">
+                {userData.name}&apos;s Account
+              </h2>
               <p className="text-gray-600">
                 Registered on {userData.registrationDate}
               </p>

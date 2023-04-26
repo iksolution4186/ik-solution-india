@@ -20,10 +20,10 @@ const User = (props) => {
     }
   }, []);
   return (
-    <div className="max-w-lg px-4 py-6 mx-auto mt-8 bg-white rounded-lg shadow-lg">
-      <>
+    <div className="min-h-screen pt-24 bg-gradient-to-l from-primary to-tertiary">
+      <div className="max-w-lg px-4 py-6 mx-auto mt-8 bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary ">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold">{props.name}'s Account</h2>
+          <h2 className="text-2xl font-bold">{props.name}&apos;s Account</h2>
           <p className="text-gray-600">
             Registered on {props.registrationDate}
           </p>
@@ -42,7 +42,7 @@ const User = (props) => {
             <p className="text-gray-800">{props.WhatsAppBalance}</p>
           </div>
         </div>
-      </>
+      </div>{" "}
     </div>
   );
 };

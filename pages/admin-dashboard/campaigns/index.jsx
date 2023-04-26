@@ -86,135 +86,149 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto mt-32 mb-10 w-fit">
-      <h2 className="mb-4 text-2xl font-medium text-center">Admin Dashboard</h2>
+    <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
+      <div className="container pt-32 pb-10 mx-auto w-fit ">
+        <h2 className="mb-4 text-2xl font-medium text-center">
+          Admin Dashboard
+        </h2>
 
-      <div className="overflow-x-scroll mt-10  w-[95vw]">
-        <table className="w-full ">
-          <thead>
-            <tr>
-              <th className="px-4 py-2">Date</th>
-              <th className="px-4 py-2">Caption</th>
-              <th className="px-4 py-2">Total Message</th>
-              <th className="px-4 py-2">Campaign Status</th>
-              <th className="px-4 py-2">Download Details</th>
-              <th className="px-4 py-2">Edit / Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {campaigns?.map((campaignArr) => (
-              <>
-                {campaignArr.campaigns.map((campaign, index) => {
-                  return (
-                    <tr key={campaign.title}>
-                      {editingCampaign?.id === campaign.id ? (
-                        <>
-                          <td className="px-4 py-2 border">
-                            {" "}
-                            {campaign.RegisteredDate}
-                          </td>
-                          <td className="px-4 py-2 border">{campaign.title}</td>
-                          <td className="px-4 py-2 border">
-                            {campaign.Messages}
-                          </td>
-                          <td className="px-4 py-2 border">
-                            <select
-                              name="campaign status"
-                              id="campaign status"
-                              defaultValue={campaign.CampaignStatus}
-                              onChange={(e) =>
-                                setEditingCampaign({
-                                  ...editingCampaign,
-                                  CampaignStatus: e.target.value,
-                                })
-                              }
-                            >
-                              <option value="pending">Pending</option>
-                              <option value="rejected">Rejected</option>
-                              <option value="delivered">Delivered</option>
-                            </select>
-                          </td>
-                          <td className="px-4 py-2 border">
-                            <CSVLink data={[campaignArr.campaigns[index]]}>
-                              Export data
-                            </CSVLink>{" "}
-                            /{" "}
-                            <ImageDownloadButton
-                              imageUrl={campaign.imageUrl}
-                              fileName={"Campaign Picture"}
-                            />
-                          </td>
-                          <td className="px-4 py-2 border">
-                            <button
-                              className="px-4 py-2 mr-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-                              onClick={() =>
-                                updateCampaign(
-                                  campaignArr.id,
-                                  editingCampaign,
-                                  index
-                                )
-                              }
-                            >
-                              Save
-                            </button>
-                            <button
-                              className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-700"
-                              onClick={() => setEditingCampaign(null)}
-                            >
-                              Cancel
-                            </button>
-                          </td>
-                        </>
-                      ) : (
-                        <>
-                          <td className="px-4 py-2 border">
-                            {" "}
-                            {campaign.RegisteredDate}
-                          </td>
-                          <td className="px-4 py-2 border">{campaign.title}</td>
-                          <td className="px-4 py-2 border">
-                            {campaign.Messages}
-                          </td>
-                          <td className="px-4 py-2 border">
-                            {campaign.CampaignStatus}
-                          </td>
-                          <td className="px-4 py-2 border">
-                            <CSVLink data={[campaignArr.campaigns[index]]}>
-                              Export data
-                            </CSVLink>{" "}
-                            /{" "}
-                            <ImageDownloadButton
-                              imageUrl={campaign.imageUrl}
-                              fileName={"Campaign Picture"}
-                            />
-                          </td>
+        <div className="overflow-x-scroll mt-10  w-[95vw]">
+          <table className="w-full ">
+            <thead>
+              <tr>
+                <th className="px-4 py-2">Date</th>
+                <th className="px-4 py-2">Caption</th>
+                <th className="px-4 py-2">Total Message</th>
+                <th className="px-4 py-2">Campaign Status</th>
+                <th className="px-4 py-2">Download Details</th>
+                <th className="px-4 py-2">Edit / Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {campaigns?.map((campaignArr) => (
+                <>
+                  {campaignArr.campaigns.map((campaign, index) => {
+                    return (
+                      <tr key={campaign.title}>
+                        {editingCampaign?.id === campaign.id ? (
+                          <>
+                            <td className="px-4 py-2 border">
+                              {" "}
+                              {campaign.RegisteredDate}
+                            </td>
+                            <td className="px-4 py-2 border">
+                              {campaign.title}
+                            </td>
+                            <td className="px-4 py-2 border">
+                              {campaign.Messages}
+                            </td>
+                            <td className="px-4 py-2 border">
+                              <select
+                                name="campaign status"
+                                id="campaign status"
+                                defaultValue={campaign.CampaignStatus}
+                                onChange={(e) =>
+                                  setEditingCampaign({
+                                    ...editingCampaign,
+                                    CampaignStatus: e.target.value,
+                                  })
+                                }
+                              >
+                                <option value="pending">Pending</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="delivered">Delivered</option>
+                              </select>
+                            </td>
+                            <td className="px-4 py-2 border">
+                              <CSVLink
+                                data={[campaignArr.campaigns[index]]}
+                                className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                              >
+                                Export data
+                              </CSVLink>{" "}
+                              <ImageDownloadButton
+                                imageUrl={campaign.imageUrl}
+                                fileName={"Campaign Picture"}
+                                className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                              />
+                            </td>
+                            <td className="px-4 py-2 border">
+                              <button
+                                className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                                onClick={() =>
+                                  updateCampaign(
+                                    campaignArr.id,
+                                    editingCampaign,
+                                    index
+                                  )
+                                }
+                              >
+                                Save
+                              </button>
+                              <button
+                                className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-700"
+                                onClick={() => setEditingCampaign(null)}
+                              >
+                                Cancel
+                              </button>
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <td className="px-4 py-2 border">
+                              {" "}
+                              {campaign.RegisteredDate}
+                            </td>
+                            <td className="px-4 py-2 capitalize border">
+                              {campaign.title}
+                            </td>
+                            <td className="px-4 py-2 border">
+                              {campaign.Messages}
+                            </td>
+                            <td className="px-4 py-2 font-bold capitalize border">
+                              {campaign.CampaignStatus}
+                            </td>
+                            <td className="flex px-4 py-2 border">
+                              <CSVLink
+                                data={[campaignArr.campaigns[index]]}
+                                className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                              >
+                                Export data
+                              </CSVLink>{" "}
+                              <ImageDownloadButton
+                                className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                                imageUrl={campaign.imageUrl}
+                                fileName={"Campaign Picture"}
+                              />
+                            </td>
 
-                          <td className="px-4 py-2 border ">
-                            <button
-                              className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-primary hover:text-secondary"
-                              onClick={() => setEditingCampaign(campaign)}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                              onClick={() =>
-                                deleteCampaign(campaignArr.id, index)
-                              }
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </>
-                      )}
-                    </tr>
-                  );
-                })}
-              </>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                            <td className="px-4 py-2 border ">
+                              <button
+                                className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                                onClick={() => setEditingCampaign(campaign)}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
+                                onClick={() =>
+                                  deleteCampaign(campaignArr.id, index)
+                                }
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </>
+                        )}
+                      </tr>
+                    );
+                  })}
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>{" "}
     </div>
   );
 };
