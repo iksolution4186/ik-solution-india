@@ -19,7 +19,7 @@ const AccountDataDisplay = () => {
 
   return (
     <div className="min-h-screen pt-24 bg-gradient-to-l from-primary to-tertiary">
-      <div className="max-w-lg px-4 py-6 mx-auto mt-8 bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary ">
+      <div className="max-w-lg px-4 py-6 mx-auto mt-8 bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary sm:p-4 sm:w-[92vw]">
         {userData && (
           <>
             <div className="flex items-center justify-between mb-4">

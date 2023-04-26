@@ -83,7 +83,7 @@ export default function AddProductForm() {
     <div className="min-h-screen pt-32 pb-10 bg-gradient-to-l from-primary to-tertiary">
       <form
         onSubmit={handleFormSubmit}
-        className="w-64 p-8 m-auto bg-white rounded-lg shadow-md min-w-[300px]"
+        className="w-64 p-8 m-auto bg-white rounded-lg shadow-md min-w-[300px] sm:p-4 sm:w-[92vw]"
       >
         <caption className="block mb-4 font-bold text-[1.3rem]">
           Add New Product

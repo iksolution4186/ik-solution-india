@@ -37,7 +37,7 @@ const Orders = () => {
           <strong className="p-4 text-2xl bg-white rounded">No Orders</strong>
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-4 ">
+        <div className="grid grid-cols-3 gap-4 sm:grid-cols-1 md:grid-cols-2 ">
           {orders?.map((order) => (
             <div key={order} className="p-4 bg-black rounded shadow-md">
               <p className="text-gray-200">Order ID: {order.id}</p>
