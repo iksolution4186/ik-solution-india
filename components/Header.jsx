@@ -209,7 +209,7 @@ const Header = () => {
                 Quick Message
               </a>
             </li>
-            <li className="flex items-center ">
+            <li className="flex items-center md:hidden">
               {user ? (
                 <button
                   className={
@@ -230,7 +230,7 @@ const Header = () => {
                 </Link>
               )}
             </li>
-            <li className="flex items-center ">
+            <li className="flex items-center md:hidden ">
               {user?.email == "mkg@admin.in" ? (
                 <Link
                   className={
@@ -256,6 +256,52 @@ const Header = () => {
           </ul>
         </nav>
       </header>{" "}
+      <div className="hidden w-full py-4 pl-8 bg-black border-t border-white md:flex md:gap-4">
+        <li className="text-white list-none ">
+          {user ? (
+            <button
+              className={
+                " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+              }
+              onClick={logOut}
+            >
+              Log Out
+            </button>
+          ) : (
+            <Link
+              href={"/login"}
+              className={
+                " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+              }
+            >
+              Log In
+            </Link>
+          )}
+        </li>{" "}
+        <li className="hidden text-white list-none md:block ">
+          {user?.email == "mkg@admin.in" ? (
+            <Link
+              className={
+                " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+              }
+              href={"/admin-dashboard"}
+            >
+              Dashboard
+            </Link>
+          ) : (
+            user && (
+              <Link
+                className={
+                  " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
+                }
+                href={"/member-dashboard"}
+              >
+                Dashboard
+              </Link>
+            )
+          )}
+        </li>
+      </div>
     </div>
   );
 };

@@ -80,7 +80,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen px-4 pt-24 pb-12 bg-gradient-to-l from-primary to-tertiary ">
+      <div className="flex items-center justify-center min-h-screen px-4 pt-24 pb-12 md:mt-24 bg-gradient-to-l from-primary to-tertiary ">
         <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md sm:p-4">
           <div>
             <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
