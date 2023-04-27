@@ -44,7 +44,7 @@ const Contact = () => {
     }
   }
   return (
-    <div className="flex items-center justify-center bg-gradient-to-r from-tertiary to-primary gap-8 px-16 py-24 mt-20 md:flex-col sm:px-4 sm:pb-16 sm:pt-6 max-w-[1535px] xlmin:mx-auto lg:px-8 lg:py-16 ">
+    <div className="flex items-center justify-center bg-gradient-to-r from-tertiary to-primary gap-8 px-16 py-24 mt-20 md:flex-col md:pt-24 sm:px-4 sm:pb-16  max-w-[1535px] xlmin:mx-auto lg:px-8 lg:py-16 ">
       <ToastContainer />
       <div className="flex-1 left_section md:w-[90vw]  sm:w-full h-full">
         <Image src={logo} alt="company logo" className="w-full h-full" />
