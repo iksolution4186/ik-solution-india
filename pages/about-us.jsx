@@ -5,7 +5,7 @@ import Engage from "@/components/Engage";
 const About = () => {
   return (
     <div className="about_page ">
-      <div className="flex items-center justify-center px-16 lg:px-8 mt-20 md:py-10 bg-gradient-to-l from-tertiary to-primary sm:p-4  xs:p-2 landing bg-secondary min-h-[70vh] sm:min-h-[50vh] sm:w-full">
+      <div className="flex md:pt-24  items-center justify-center px-16 lg:px-8 mt-20 md:pb-10 bg-gradient-to-l from-tertiary to-primary sm:px-4 sm:pb-4  xs:px-2 xs:pb-2 landing bg-secondary min-h-[70vh] sm:min-h-[50vh] sm:w-full">
         <div className="flex flex-col items-center  w-[70vw] sm:w-[95%] xs:w-full gap-4 text-center content_about">
           <strong className="mb-3 text-5xl font-bold leading-[3.75rem]  md:text-3xl ">
             About us

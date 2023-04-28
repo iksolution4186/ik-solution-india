@@ -13,7 +13,7 @@ const ServiceDetail = ({ currentService }) => {
       <>
         {currentService.map((service) => {
           return (
-            <div className="service_detail" key={service.title}>
+            <div className="md:pt-[4.5rem] service_detail" key={service.title}>
               <div className="flex items-center justify-center min-h-[70vh] mt-20 landing bg-gradient-to-r from-primary to-tertiary ">
                 <div className="flex flex-col items-center w-[70vw] h-full gap-8 text-center landing_inside sm:w-[95vw] xs:w-full ">
                   <h2 className="text-5xl font-bold leading-[3.75rem]  md:text-3xl ">

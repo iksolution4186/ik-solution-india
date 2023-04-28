@@ -6,7 +6,7 @@ import tagData from "@/assets/tagData";
 import servicesData from "@/assets/services";
 const Home = () => {
   return (
-    <div>
+    <div className="md:pt-16">
       <section className="flex items-center justify-center min-h-screen px-16 lg:px-8 mt-20 md:py-10 xs:p-2 landing bg-secondary lg:min-h-[70vh]  bg-gradient-to-r from-primary to-tertiary">
         <div className="flex flex-col items-center w-[70vw] sm:w-[95vw] xs:w-full h-full gap-8 text-center  landing_inside text-black">
           <h2 className="text-5xl font-bold leading-[3.75rem]  md:text-3xl ">
