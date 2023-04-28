@@ -83,7 +83,7 @@ const Dashboard = () => {
           Admin Dashboard
         </h2>
 
-        <div className="overflow-x-scroll mt-10  w-[95vw]">
+        <div className="overflow-x-scroll mt-10  w-[95vw] m-auto">
           <table className="w-full ">
             <thead>
               <tr>
@@ -95,7 +95,7 @@ const Dashboard = () => {
                 <th className="px-4 py-2">Edit / Delete</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white">
               {campaigns?.map((campaignArr) => (
                 <>
                   {campaignArr.campaigns.map((campaign, index) => {

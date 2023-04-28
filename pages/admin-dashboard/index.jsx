@@ -62,7 +62,7 @@ const Dashboard = () => {
           Admin Dashboard
         </h2>
 
-        <div className="overflow-x-scroll mt-10  w-[95vw]">
+        <div className="overflow-x-scroll mt-10  w-[95vw] m-auto">
           <table className="w-full ">
             <thead>
               <tr>
@@ -75,7 +75,7 @@ const Dashboard = () => {
                 <th className="px-4 py-2">Delete / Edit</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white">
               {users.map((user) => (
                 <tr key={user.id}>
                   <td className="px-4 py-2 border">{user.id}</td>
