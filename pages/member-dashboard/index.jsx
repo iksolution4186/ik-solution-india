@@ -74,7 +74,7 @@ const Dashboard = () => {
             <div className="overflow-x-scroll mt-10  w-[95vw] mx-auto  ">
               <table className="w-full ">
                 <caption className="mb-16">
-                  <div className="max-w-lg px-4 py-6 mx-auto md:w-[80vw] bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary ">
+                  <div className="max-w-lg px-4 py-6 mx-auto bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary ">
                     <div className="flex items-center justify-between mb-4 text-center">
                       <p className="w-full font-bold text-gray-900 ">
                         Your Whatsapp balance is -{" "}
