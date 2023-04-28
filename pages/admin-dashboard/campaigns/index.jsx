@@ -130,7 +130,7 @@ const Dashboard = () => {
                                 <option value="delivered">Delivered</option>
                               </select>
                             </td>
-                            <td className="px-4 py-2 border">
+                            <td className="px-4 py-2 border w-[300px]">
                               <CSVLink
                                 data={[campaignArr.campaigns[index]]}
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
@@ -143,7 +143,7 @@ const Dashboard = () => {
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               />
                             </td>
-                            <td className="px-4 py-2 border">
+                            <td className="px-4 py-2 border w-[200px]">
                               <button
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                                 onClick={() =>
@@ -179,7 +179,7 @@ const Dashboard = () => {
                             <td className="px-4 py-2 font-bold capitalize border">
                               {campaign.CampaignStatus}
                             </td>
-                            <td className="flex px-4 py-2 border">
+                            <td className="w-[300px] px-4 py-2 border">
                               <CSVLink
                                 data={[campaignArr.campaigns[index]]}
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
@@ -193,7 +193,7 @@ const Dashboard = () => {
                               />
                             </td>
 
-                            <td className="px-4 py-2 border ">
+                            <td className="px-4 py-2 border w-[200px]">
                               <button
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                                 onClick={() => setEditingCampaign(campaign)}

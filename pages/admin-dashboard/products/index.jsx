@@ -117,7 +117,7 @@ const Dashboard = () => {
                         />
                       </td>
 
-                      <td className="px-4 py-2 border">
+                      <td className="px-4 py-2 border w-[200px] ">
                         <button
                           className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                           onClick={() => updateUser(user.id, editingUser)}
@@ -146,7 +146,7 @@ const Dashboard = () => {
                       <td className="px-4 py-2 border">{user.name}</td>
                       <td className="px-4 py-2 border">{user.price}</td>
 
-                      <td className="px-4 py-2 border ">
+                      <td className="px-4 py-2 border w-[200px] ">
                         <button
                           className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                           onClick={() => setEditingUser(user)}

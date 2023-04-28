@@ -19,7 +19,7 @@ const Form = () => {
   const [progress, setProgress] = useState(0);
   const user = useContext(MyContext);
   const router = useRouter();
-  const numLines = mobileNumbers.split("\n").length;
+  const numLines = mobileNumbers.split("\n").length - 1;
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {

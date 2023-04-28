@@ -110,7 +110,7 @@ const Dashboard = () => {
                     <th className="px-4 py-2">Caption</th>
                     <th className="px-4 py-2">Total Message</th>
                     <th className="px-4 py-2">Campaign Status</th>
-                    <th className="px-4 py-2">Download Details</th>
+                    <th className="px-4 py-2 ">Download Details</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white">
@@ -137,7 +137,7 @@ const Dashboard = () => {
                           <td className="px-4 py-2 font-bold capitalize border">
                             {campaign.CampaignStatus}
                           </td>
-                          <td className="flex gap-4 px-4 py-2 border">
+                          <td className=" px-4 py-2 border w-[300px] ">
                             <CSVLink
                               data={[campaigns.campaigns[index]]}
                               className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
