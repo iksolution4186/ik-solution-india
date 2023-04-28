@@ -256,7 +256,7 @@ const Header = () => {
           </ul>
         </nav>
       </header>{" "}
-      <div className="hidden w-full py-4 pl-8 bg-black border-t border-white md:flex md:gap-4">
+      <div className="hidden w-full bg-black border-t border-white md:py-4 md:px-8 sm:p-4 md:flex md:gap-4">
         <li className="text-white list-none ">
           {user ? (
             <button

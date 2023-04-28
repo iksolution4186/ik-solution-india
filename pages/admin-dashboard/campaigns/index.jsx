@@ -83,7 +83,7 @@ const Dashboard = () => {
           Admin Dashboard
         </h2>
 
-        <div className="overflow-x-scroll mt-10  w-[95vw] m-auto">
+        <div className="overflow-x-scroll mt-10  lg:w-[95vw] m-auto">
           <table className="w-full ">
             <thead>
               <tr>
@@ -130,7 +130,7 @@ const Dashboard = () => {
                                 <option value="delivered">Delivered</option>
                               </select>
                             </td>
-                            <td className="px-4 py-2 border w-[300px]">
+                            <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                               <CSVLink
                                 data={[campaignArr.campaigns[index]]}
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
@@ -143,7 +143,7 @@ const Dashboard = () => {
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               />
                             </td>
-                            <td className="px-4 py-2 border w-[200px]">
+                            <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                               <button
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                                 onClick={() =>
@@ -179,7 +179,7 @@ const Dashboard = () => {
                             <td className="px-4 py-2 font-bold capitalize border">
                               {campaign.CampaignStatus}
                             </td>
-                            <td className="w-[300px] px-4 py-2 border">
+                            <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                               <CSVLink
                                 data={[campaignArr.campaigns[index]]}
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
@@ -193,7 +193,7 @@ const Dashboard = () => {
                               />
                             </td>
 
-                            <td className="px-4 py-2 border w-[200px]">
+                            <td className="px-4 py-2 border ">
                               <button
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                                 onClick={() => setEditingCampaign(campaign)}

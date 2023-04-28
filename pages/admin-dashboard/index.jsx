@@ -56,13 +56,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
+    <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary xlmin:max-w-1535 xlmin:m-auto">
       <div className="container w-full pt-32 pb-10 mx-auto ">
         <h2 className="mb-4 text-2xl font-medium text-center">
           Admin Dashboard
         </h2>
 
-        <div className="overflow-x-scroll mt-10  w-[95vw] m-auto">
+        <div className="overflow-x-scroll mt-10  xl:w-[95vw]  m-auto">
           <table className="w-full ">
             <thead>
               <tr>
@@ -144,7 +144,7 @@ const Dashboard = () => {
                           view
                         </Link>
                       </td>
-                      <td className="px-4 py-2 border w-[200px]">
+                      <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                         <button
                           className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                           onClick={() => updateUser(user.id, editingUser)}
@@ -178,7 +178,7 @@ const Dashboard = () => {
                         </Link>
                       </td>
 
-                      <td className="px-4 py-2 border w-[200px]">
+                      <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                         <button
                           className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                           onClick={() => setEditingUser(user)}

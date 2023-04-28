@@ -65,13 +65,13 @@ const Dashboard = () => {
       {!campaigns && !userData ? (
         <Loading />
       ) : (
-        <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary xlmin:m-auto max-w-[1535px]">
+        <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary xlmin:m-auto ">
           <div className="container w-full pt-32 pb-10 mx-auto ">
             <h2 className="mb-4 text-2xl font-medium text-center">
               Member Dashboard
             </h2>
 
-            <div className="overflow-x-scroll mt-10  w-[95vw] mx-auto  ">
+            <div className="overflow-x-scroll mt-10  lg:w-[95vw] mx-auto  ">
               <table className="w-full ">
                 <caption className="mb-16">
                   <div className="max-w-lg px-4 py-6 mx-auto bg-white rounded-lg shadow-lg bg-gradient-to-l from-primary to-tertiary ">
@@ -137,7 +137,7 @@ const Dashboard = () => {
                           <td className="px-4 py-2 font-bold capitalize border">
                             {campaign.CampaignStatus}
                           </td>
-                          <td className=" px-4 py-2 border w-[300px] ">
+                          <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                             <CSVLink
                               data={[campaigns.campaigns[index]]}
                               className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"

@@ -48,8 +48,8 @@ const Footer = () => {
           <strong className="text-lg font-medium">Contact Us</strong>
           <ul className="flex flex-col gap-3 pt-5">
             <li>
-              Address: Parmar Colony, Distt, near Giyan Hospital, Garhshankar,
-              Punjab 144527
+              Address: Parmar Colony, Distt. Hoshiarpur, near Giyan Hospital,
+              Garhshankar, Punjab 144527
             </li>
             <li>Email: iksolution4186@gmail.com</li>
             <li>Tel: +91 83604-74290</li>

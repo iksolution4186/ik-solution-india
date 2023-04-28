@@ -64,7 +64,7 @@ const Dashboard = () => {
             Add New Products
           </Link>
         </div>
-        <div className="overflow-x-scroll mt-10  w-[95vw] m-auto">
+        <div className="overflow-x-scroll mt-10  lg:w-[95vw] m-auto">
           <table className="w-full ">
             <thead>
               <tr>
@@ -117,7 +117,7 @@ const Dashboard = () => {
                         />
                       </td>
 
-                      <td className="px-4 py-2 border w-[200px] ">
+                      <td className="flex gap-4 px-4 py-2 border sm:gap-2 ">
                         <button
                           className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                           onClick={() => updateUser(user.id, editingUser)}
@@ -146,7 +146,7 @@ const Dashboard = () => {
                       <td className="px-4 py-2 border">{user.name}</td>
                       <td className="px-4 py-2 border">{user.price}</td>
 
-                      <td className="px-4 py-2 border w-[200px] ">
+                      <td className="flex gap-4 px-4 py-2 border sm:gap-2 ">
                         <button
                           className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                           onClick={() => setEditingUser(user)}

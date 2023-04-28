@@ -113,7 +113,7 @@ const Form = () => {
     <div className="min-h-screen pt-32 pb-24 bg-gradient-to-l from-primary to-tertiary">
       <form
         onSubmit={handleSubmit}
-        className="max-w-md min-h-screen p-8 mx-auto bg-white rounded-lg shadow-md sm:p-4 sm:w-[92vw]"
+        className="max-w-md  p-8 mx-auto bg-white rounded-lg shadow-md sm:p-4 sm:w-[92vw]"
       >
         <caption className="block mb-4 text-3xl font-bold ">
           Add Campaign
