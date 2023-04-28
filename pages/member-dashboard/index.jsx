@@ -140,7 +140,7 @@ const Dashboard = () => {
                           <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                             <CSVLink
                               data={[campaigns.campaigns[index]]}
-                              className="p-[7px] transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+                              className="p-[7px] md:w-[100px]  transition-all duration-300 border rounded  text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
                             >
                               Export data
                             </CSVLink>{" "}

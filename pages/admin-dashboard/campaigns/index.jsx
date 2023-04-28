@@ -130,10 +130,10 @@ const Dashboard = () => {
                                 <option value="delivered">Delivered</option>
                               </select>
                             </td>
-                            <td className="flex gap-4 px-4 py-2 border sm:gap-2">
+                            <td className="flex gap-4 px-4 py-2 border sm:gap-2 ">
                               <CSVLink
                                 data={[campaignArr.campaigns[index]]}
-                                className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                                className="px-4 md:w-[150px]  py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               >
                                 Export data
                               </CSVLink>{" "}
@@ -143,8 +143,8 @@ const Dashboard = () => {
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               />
                             </td>
-                            <td className="flex gap-4 px-4 py-2 border sm:gap-2">
-                              <button
+                            <td className="px-4 py-2 border ">
+                              <span
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                                 onClick={() =>
                                   updateCampaign(
@@ -155,13 +155,13 @@ const Dashboard = () => {
                                 }
                               >
                                 Save
-                              </button>
-                              <button
+                              </span>
+                              <span
                                 className="px-4 py-2 font-bold text-white bg-gray-500 rounded hover:bg-gray-700"
                                 onClick={() => setEditingCampaign(null)}
                               >
                                 Cancel
-                              </button>
+                              </span>
                             </td>
                           </>
                         ) : (
@@ -182,7 +182,7 @@ const Dashboard = () => {
                             <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                               <CSVLink
                                 data={[campaignArr.campaigns[index]]}
-                                className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                                className="px-4 md:w-[120px] py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               >
                                 Export data
                               </CSVLink>{" "}
@@ -194,20 +194,20 @@ const Dashboard = () => {
                             </td>
 
                             <td className="px-4 py-2 border ">
-                              <button
+                              <span
                                 className="px-4 py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                                 onClick={() => setEditingCampaign(campaign)}
                               >
                                 Edit
-                              </button>
-                              <button
+                              </span>
+                              <span
                                 className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
                                 onClick={() =>
                                   deleteCampaign(campaignArr.id, index)
                                 }
                               >
                                 Delete
-                              </button>
+                              </span>
                             </td>
                           </>
                         )}
