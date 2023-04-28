@@ -68,9 +68,12 @@ const Orders = () => {
             <strong className="p-4 text-2xl bg-white rounded">No Orders</strong>
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-4">
+          <div>
             {orders?.map((ordersArr) => (
-              <div key={ordersArr.id}>
+              <div
+                key={ordersArr.id}
+                className="grid grid-cols-3 gap-4 sm:grid-cols-1 md:grid-cols-2"
+              >
                 {ordersArr.orders.map((order, index) => {
                   return (
                     <div
