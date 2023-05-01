@@ -5,8 +5,7 @@ import {
   MdOutlineKeyboardArrowUp,
   MdArrowRight,
 } from "react-icons/md";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase.config.js";
+
 import { MyContext } from "@/assets/userContext.js";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { useEffect, useState, useContext } from "react";
@@ -20,18 +19,7 @@ const Header = () => {
   const router = useRouter();
   const path = router.asPath;
   const user = useContext(MyContext);
-  function logOut() {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        alert("signed out");
-        router.push("/login");
-      })
-      .catch((error) => {
-        // An error happened.
-        alert(error.message);
-      });
-  }
+
   useEffect(() => {
     setInnerWidth(window.innerWidth);
   }, []);
@@ -254,18 +242,9 @@ const Header = () => {
           </ul>
         </nav>
       </header>{" "}
-      <div className="hidden w-full bg-black border-t border-white md:py-4 md:px-8 sm:p-4 md:flex md:gap-4">
+      <div className="hidden w-full bg-black border-t border-white md:py-4 md:px-8 sm:p-4 md:flex md:gap-2">
         <li className="text-white list-none ">
-          {user ? (
-            <button
-              className={
-                " flex items-center w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
-              }
-              onClick={logOut}
-            >
-              Log Out
-            </button>
-          ) : (
+          {!user && (
             <Link
               href={"/login"}
               className={
