@@ -8,7 +8,7 @@ const IndustrailCard = ({
   courseImage,
 }) => {
   return (
-    <div className="flex flex-col  gap-2 mb-4 h-96 sm:w-[80vw] xs:w-[95vw] bg-white p-2 rounded shadow-lg">
+    <div className="flex flex-col  gap-2 mb-4 h-96 sm:w-[90vw]  bg-white p-2 rounded shadow-lg">
       <Image src={courseImage} alt="Course Image" className="h-[50%]" />
       <h3 className="font-bold ">{courseName}</h3>
       <p>{courseDuration}</p>
