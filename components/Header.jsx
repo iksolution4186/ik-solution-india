@@ -5,7 +5,8 @@ import {
   MdOutlineKeyboardArrowUp,
   MdArrowRight,
 } from "react-icons/md";
-
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase.config.js";
 import { MyContext } from "@/assets/userContext.js";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { useEffect, useState, useContext } from "react";
@@ -19,7 +20,18 @@ const Header = () => {
   const router = useRouter();
   const path = router.asPath;
   const user = useContext(MyContext);
-
+  function logOut() {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        alert("signed out");
+        router.push("/login");
+      })
+      .catch((error) => {
+        // An error happened.
+        alert(error.message);
+      });
+  }
   useEffect(() => {
     setInnerWidth(window.innerWidth);
   }, []);
