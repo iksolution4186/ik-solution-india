@@ -12,6 +12,7 @@ import AdminHeader from "@/components/AdminHeader.jsx";
 import DashboardFooter from "@/components/DashboardFooter.jsx";
 import MemberHeader from "@/components/MemberHeader.jsx";
 import { AiOutlineWhatsApp } from "react-icons/ai";
+import Link from "next/link.js";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const hideHeaderFooter = router.pathname === "/get-quote";
@@ -82,6 +83,7 @@ export default function App({ Component, pageProps }) {
           >
             <AiOutlineWhatsApp id="whatsapp__icon" className="text-4xl" />
           </a>
+
           {!hideHeaderFooter && !showAdminHeader && !showMemberHeader && (
             <Footer />
           )}

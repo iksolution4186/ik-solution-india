@@ -198,17 +198,15 @@ const Header = () => {
                 Contact Us
               </Link>
             </li>
-            <li className="flex items-center ">
-              <a
-                href={"#footer"}
-                onClick={() => setBarToggle(false)}
-                className={
-                  " w-fit border border-tertiary p-2 rounded hover:text-secondary transition-all duration-300 hover:bg-primary"
-                }
+            <li className="flex items-center h-full md:hidden ">
+              <Link
+                href={"/industrial-training"}
+                className={"btn-primary gradient-primary text-black"}
               >
-                Quick Message
-              </a>
+                Industrail Training
+              </Link>
             </li>
+
             <li className="flex items-center md:hidden">
               {user ? (
                 <button
@@ -300,6 +298,14 @@ const Header = () => {
               </Link>
             )
           )}
+        </li>
+        <li className="flex items-center h-full ">
+          <Link
+            href={"/industrial-training"}
+            className={"btn-primary p-2 gradient-primary text-black"}
+          >
+            Industrail Training
+          </Link>
         </li>
       </div>
     </div>

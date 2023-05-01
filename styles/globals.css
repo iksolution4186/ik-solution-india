@@ -12,3 +12,12 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
+
+@layer base {
+  .btn-primary {
+    @apply p-3 transition-all duration-300 border rounded w-fit text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary;
+  }
+  .gradient-primary {
+    @apply bg-gradient-to-l from-tertiary to-primary;
+  }
+}
