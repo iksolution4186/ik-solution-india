@@ -295,7 +295,7 @@ const Header = () => {
             href={"/industrial-training"}
             className={"btn-primary p-2 gradient-primary text-black"}
           >
-            Industrail Training
+            Industrial Training
           </Link>
         </li>
       </div>
