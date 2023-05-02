@@ -203,7 +203,7 @@ const Header = () => {
                 href={"/industrial-training"}
                 className={"btn-primary gradient-primary text-black"}
               >
-                Industrail Training
+                Industrial Training
               </Link>
             </li>
 
