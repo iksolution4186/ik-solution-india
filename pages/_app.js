@@ -12,7 +12,7 @@ import AdminHeader from "@/components/AdminHeader.jsx";
 import DashboardFooter from "@/components/DashboardFooter.jsx";
 import MemberHeader from "@/components/MemberHeader.jsx";
 import { AiOutlineWhatsApp } from "react-icons/ai";
-import Link from "next/link.js";
+import { Analytics } from "@vercel/analytics/react";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const hideHeaderFooter = router.pathname === "/get-quote";
@@ -76,6 +76,7 @@ export default function App({ Component, pageProps }) {
           {showAdminHeader && <AdminHeader />}
           {showMemberHeader && <MemberHeader />}
           <Component {...pageProps} />
+          <Analytics />
           <a
             href="https://wa.me/+918360474290"
             target={"_blank"}
