@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase.config";
 import { useRouter } from "next/router";
 import { MyContext } from "@/assets/userContext";
+import * as XLSX from "xlsx";
+
 import {
   collection,
   getDoc,
@@ -13,6 +15,14 @@ import Link from "next/link";
 import Loading from "@/components/Loading";
 import ImageDownloadButton from "@/components/ImageDownloadImage";
 import { CSVLink } from "react-csv";
+
+const generateExcel = (data) => {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet 1");
+  const excelFile = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+  return excelFile;
+};
 
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -50,15 +60,18 @@ const Dashboard = () => {
     getDocument();
   }, []);
 
-  // const deleteUser = async (id) => {
-  //   const userRef = doc(collection(db, "products"), id);
-  //   await deleteDoc(userRef);
-  // };
-  // const updateUser = async (id, updatedUser) => {
-  //   const userRef = doc(collection(db, "products"), id);
-  //   await updateDoc(userRef, updatedUser);
-  //   setEditingUser(null);
-  // };
+  const handleDownload = (object) => {
+    const excelFile = generateExcel([object]);
+    const blob = new Blob([excelFile], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "campaign.xlsx";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <>
@@ -123,29 +136,33 @@ const Dashboard = () => {
                   ) : (
                     <>
                       {campaigns?.campaigns?.map((campaign, index) => (
-                        <tr key={campaign}>
+                        <tr key={campaign.id}>
                           <td className="px-4 py-2 border">
                             {" "}
-                            {campaign.RegisteredDate}
+                            {campaign.registered_date}
                           </td>
                           <td className="px-4 py-2 capitalize border">
-                            {campaign.title}
+                            {campaign.campaign_title}
                           </td>
                           <td className="px-4 py-2 border">
-                            {campaign.Messages}
+                            {campaign.number_of_messages_to_send}
                           </td>
                           <td className="px-4 py-2 font-bold capitalize border">
-                            {campaign.CampaignStatus}
+                            {campaign.campaign_status}
                           </td>
                           <td className="flex gap-4 px-4 py-2 border sm:gap-2">
-                            <CSVLink
-                              data={[campaigns.campaigns[index]]}
-                              className="p-[7px] md:w-[100px]  transition-all duration-300 border rounded  text-tertiary bg-secondary border-secondary hover:text-secondary hover:border-primary hover:bg-gradient-to-l from-primary to-tertiary"
+                            <button
+                              onClick={() =>
+                                handleDownload(campaigns.campaigns[index])
+                              }
+                              className="px-4 md:w-[120px] py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                             >
                               Export data
-                            </CSVLink>{" "}
+                            </button>{" "}
                             <ImageDownloadButton
-                              imageUrl={campaign.imageUrl}
+                              imageUrl={
+                                campaign.image_url_of_the_image_by_client
+                              }
                               fileName={"Campaign Picture"}
                             />
                           </td>

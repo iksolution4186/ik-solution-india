@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../../firebase.config";
+import * as XLSX from "xlsx";
 import Image from "next/image";
 import { CSVLink } from "react-csv";
 
@@ -7,7 +8,6 @@ import {
   onSnapshot,
   collection,
   doc,
-  deleteDoc,
   arrayRemove,
   getDoc,
   setDoc,
@@ -17,6 +17,14 @@ import { MyContext } from "@/assets/userContext";
 import { useRouter } from "next/router";
 import ImageDownloadButton from "@/components/ImageDownloadImage";
 import Loading from "@/components/Loading";
+
+const generateExcel = (data) => {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet 1");
+  const excelFile = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+  return excelFile;
+};
 
 const Dashboard = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -47,6 +55,7 @@ const Dashboard = () => {
       });
 
       setCampaigns(campaignsDummyArr);
+      console.log(campaignsDummyArr);
       setLoading(false);
     });
   }, [user, router]);
@@ -76,6 +85,19 @@ const Dashboard = () => {
     setEditingCampaign(null);
   };
 
+  const handleDownload = (object) => {
+    const excelFile = generateExcel([object]);
+    const blob = new Blob([excelFile], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "campaign.xlsx";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-l from-primary to-tertiary">
       <div className="container w-full pt-32 pb-10 mx-auto ">
@@ -100,28 +122,28 @@ const Dashboard = () => {
                 <>
                   {campaignArr.campaigns.map((campaign, index) => {
                     return (
-                      <tr key={campaign.title}>
+                      <tr key={campaign.id}>
                         {editingCampaign?.id === campaign.id ? (
                           <>
                             <td className="px-4 py-2 border">
                               {" "}
-                              {campaign.RegisteredDate}
+                              {campaign.registered_date}
                             </td>
                             <td className="px-4 py-2 border">
-                              {campaign.title}
+                              {campaign.campaign_title}
                             </td>
                             <td className="px-4 py-2 border">
-                              {campaign.Messages}
+                              {campaign.number_of_messages_to_send}
                             </td>
                             <td className="px-4 py-2 border">
                               <select
                                 name="campaign status"
                                 id="campaign status"
-                                defaultValue={campaign.CampaignStatus}
+                                defaultValue={campaign.campaign_status}
                                 onChange={(e) =>
                                   setEditingCampaign({
                                     ...editingCampaign,
-                                    CampaignStatus: e.target.value,
+                                    campaign_status: e.target.value,
                                   })
                                 }
                               >
@@ -131,14 +153,18 @@ const Dashboard = () => {
                               </select>
                             </td>
                             <td className="flex gap-4 px-4 py-2 border sm:gap-2 ">
-                              <CSVLink
-                                data={[campaignArr.campaigns[index]]}
-                                className="px-4 md:w-[150px]  py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
+                              <button
+                                onClick={() =>
+                                  handleDownload(campaignArr.campaigns[index])
+                                }
+                                className="px-4 md:w-[120px] py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               >
                                 Export data
-                              </CSVLink>{" "}
+                              </button>{" "}
                               <ImageDownloadButton
-                                imageUrl={campaign.imageUrl}
+                                imageUrl={
+                                  campaign.image_url_of_the_image_by_client
+                                }
                                 fileName={"Campaign Picture"}
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               />
@@ -168,27 +194,31 @@ const Dashboard = () => {
                           <>
                             <td className="px-4 py-2 border">
                               {" "}
-                              {campaign.RegisteredDate}
+                              {campaign.registered_date}
                             </td>
                             <td className="px-4 py-2 capitalize border">
-                              {campaign.title}
+                              {campaign.campaign_title}
                             </td>
                             <td className="px-4 py-2 border">
-                              {campaign.Messages}
+                              {campaign.number_of_messages_to_send}
                             </td>
                             <td className="px-4 py-2 font-bold capitalize border">
-                              {campaign.CampaignStatus}
+                              {campaign.campaign_status}
                             </td>
                             <td className="flex gap-4 px-4 py-2 border sm:gap-2">
-                              <CSVLink
-                                data={[campaignArr.campaigns[index]]}
+                              <button
+                                onClick={() =>
+                                  handleDownload(campaignArr.campaigns[index])
+                                }
                                 className="px-4 md:w-[120px] py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               >
                                 Export data
-                              </CSVLink>{" "}
+                              </button>{" "}
                               <ImageDownloadButton
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
-                                imageUrl={campaign.imageUrl}
+                                imageUrl={
+                                  campaign.image_url_of_the_image_by_client
+                                }
                                 fileName={"Campaign Picture"}
                               />
                             </td>

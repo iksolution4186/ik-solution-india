@@ -19,7 +19,7 @@ const Form = () => {
   const [progress, setProgress] = useState(0);
   const user = useContext(MyContext);
   const router = useRouter();
-  const numLines = mobileNumbers.split("\n").length - 1;
+  const numLines = mobileNumbers.split("\n").length;
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
@@ -69,14 +69,14 @@ const Form = () => {
         const imageUrl = await getDownloadURL(storageRef);
         const form = {
           id: uid,
-          title,
-          description,
-          url,
-          mobileNumbers,
-          RegisteredDate: day + "/" + month + "/" + year,
-          imageUrl,
-          Messages: numLines,
-          CampaignStatus: "pending",
+          campaign_title: title,
+          campaign_description: description,
+          campaign_url: url,
+          campaign_mobile_numbers: mobileNumbers,
+          registered_date: day + "/" + month + "/" + year,
+          image_url_of_the_image_by_client:imageUrl,
+          number_of_messages_to_send: numLines,
+          campaign_status: "pending",
         };
         // You can save the form data to Firestore or Realtime Database
         try {
@@ -186,12 +186,13 @@ const Form = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="image" className="block mb-2 font-bold text-gray-700">
-            Image
+            Image (Only .jpg .png .jpeg Allowed)
           </label>
           <input
             type="file"
             id="image"
             onChange={handleImageChange}
+            accept=".jpg, .jpeg, .png"
             className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus :shadow-outline"
             required
           />
