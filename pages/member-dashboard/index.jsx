@@ -139,16 +139,16 @@ const Dashboard = () => {
                         <tr key={campaign.id}>
                           <td className="px-4 py-2 border">
                             {" "}
-                            {campaign.registered_date}
+                            {campaign.RegisteredDate}
                           </td>
                           <td className="px-4 py-2 capitalize border">
-                            {campaign.campaign_title}
+                            {campaign.title}
                           </td>
                           <td className="px-4 py-2 border">
-                            {campaign.number_of_messages_to_send}
+                            {campaign.Messages}
                           </td>
                           <td className="px-4 py-2 font-bold capitalize border">
-                            {campaign.campaign_status}
+                            {campaign.CampaignStatus}
                           </td>
                           <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                             <button
@@ -160,9 +160,7 @@ const Dashboard = () => {
                               Export data
                             </button>{" "}
                             <ImageDownloadButton
-                              imageUrl={
-                                campaign.image_url_of_the_image_by_client
-                              }
+                              imageUrl={campaign.imageUrl}
                               fileName={"Campaign Picture"}
                             />
                           </td>

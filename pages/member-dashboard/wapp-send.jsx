@@ -69,14 +69,14 @@ const Form = () => {
         const imageUrl = await getDownloadURL(storageRef);
         const form = {
           id: uid,
-          campaign_title: title,
-          campaign_description: description,
-          campaign_url: url,
-          campaign_mobile_numbers: mobileNumbers,
-          registered_date: day + "/" + month + "/" + year,
-          image_url_of_the_image_by_client:imageUrl,
-          number_of_messages_to_send: numLines,
-          campaign_status: "pending",
+          title,
+          description,
+          url,
+          mobileNumbers,
+          RegisteredDate: day + "/" + month + "/" + year,
+          imageUrl,
+          Messages: numLines,
+          CampaignStatus: "pending",
         };
         // You can save the form data to Firestore or Realtime Database
         try {

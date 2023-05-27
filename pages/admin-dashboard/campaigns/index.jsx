@@ -127,23 +127,23 @@ const Dashboard = () => {
                           <>
                             <td className="px-4 py-2 border">
                               {" "}
-                              {campaign.registered_date}
+                              {campaign.RegisteredDate}
                             </td>
                             <td className="px-4 py-2 border">
-                              {campaign.campaign_title}
+                              {campaign.title}
                             </td>
                             <td className="px-4 py-2 border">
-                              {campaign.number_of_messages_to_send}
+                              {campaign.Messages}
                             </td>
                             <td className="px-4 py-2 border">
                               <select
                                 name="campaign status"
                                 id="campaign status"
-                                defaultValue={campaign.campaign_status}
+                                defaultValue={campaign.CampaignStatus}
                                 onChange={(e) =>
                                   setEditingCampaign({
                                     ...editingCampaign,
-                                    campaign_status: e.target.value,
+                                    CampaignStatus: e.target.value,
                                   })
                                 }
                               >
@@ -162,9 +162,7 @@ const Dashboard = () => {
                                 Export data
                               </button>{" "}
                               <ImageDownloadButton
-                                imageUrl={
-                                  campaign.image_url_of_the_image_by_client
-                                }
+                                imageUrl={campaign.imageUrl}
                                 fileName={"Campaign Picture"}
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               />
@@ -194,16 +192,16 @@ const Dashboard = () => {
                           <>
                             <td className="px-4 py-2 border">
                               {" "}
-                              {campaign.registered_date}
+                              {campaign.RegisteredDate}
                             </td>
                             <td className="px-4 py-2 capitalize border">
-                              {campaign.campaign_title}
+                              {campaign.title}
                             </td>
                             <td className="px-4 py-2 border">
-                              {campaign.number_of_messages_to_send}
+                              {campaign.Messages}
                             </td>
                             <td className="px-4 py-2 font-bold capitalize border">
-                              {campaign.campaign_status}
+                              {campaign.CampaignStatus}
                             </td>
                             <td className="flex gap-4 px-4 py-2 border sm:gap-2">
                               <button
@@ -216,9 +214,7 @@ const Dashboard = () => {
                               </button>{" "}
                               <ImageDownloadButton
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
-                                imageUrl={
-                                  campaign.image_url_of_the_image_by_client
-                                }
+                                imageUrl={campaign.imageUrl}
                                 fileName={"Campaign Picture"}
                               />
                             </td>
