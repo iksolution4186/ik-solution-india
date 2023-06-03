@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../../firebase.config";
 import * as XLSX from "xlsx";
-import Image from "next/image";
 import { CSVLink } from "react-csv";
 
 import {
@@ -22,7 +21,75 @@ const generateExcel = (data) => {
   const workbook = XLSX.utils.book_new();
   const worksheet = XLSX.utils.json_to_sheet(data);
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet 1");
-  const excelFile = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+
+  let maxLength = 0;
+  const range = XLSX.utils.decode_range(worksheet["!ref"]);
+
+  for (let row = range.s.r; row <= range.e.r; row++) {
+    for (let col = range.s.c; col <= range.e.c; col++) {
+      const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+      const cell = worksheet[cellAddress];
+
+      if (cell && cell.v && cell.v.length > maxLength) {
+        maxLength = cell.v.length;
+      }
+    }
+  }
+
+  const characterLimit = 200;
+
+  if (maxLength > characterLimit) {
+    const rowsToAdd = Math.ceil(maxLength / characterLimit) - 1;
+
+    for (let row = range.s.r; row <= range.e.r; row++) {
+      for (let col = range.s.c; col <= range.e.c; col++) {
+        const cellAddress = XLSX.utils.encode_cell({ r: row, c: col });
+        const cell = worksheet[cellAddress];
+
+        if (cell && cell.v && cell.v.length > characterLimit) {
+          const cellValue = cell.v;
+          const rowSpan = Math.ceil(cellValue.length / characterLimit);
+          const currentRowIndex = row + 1;
+
+          // Shift existing rows down to accommodate the additional rows
+          for (let i = 0; i < rowsToAdd; i++) {
+            const newRow = currentRowIndex + i;
+            XLSX.utils.sheet_shiftRows(
+              worksheet,
+              newRow,
+              worksheet["!rows"].length,
+              1,
+              { origin: newRow }
+            );
+          }
+
+          // Split the cell value into chunks and write them to the worksheet
+          let rowIndex = currentRowIndex;
+          for (let i = 0; i < rowSpan; i++) {
+            const chunk = cellValue.substring(
+              i * characterLimit,
+              (i + 1) * characterLimit
+            );
+            const currentCellAddress = XLSX.utils.encode_cell({
+              r: rowIndex,
+              c: col,
+            });
+            worksheet[currentCellAddress] = { t: "s", v: chunk };
+            rowIndex++;
+          }
+
+          // Clear the original cell value
+          cell.v = "";
+        }
+      }
+    }
+  }
+
+  const excelFile = XLSX.write(workbook, {
+    bookType: "xlsx",
+    type: "buffer",
+  });
+
   return excelFile;
 };
 
@@ -153,14 +220,15 @@ const Dashboard = () => {
                               </select>
                             </td>
                             <td className="flex gap-4 px-4 py-2 border sm:gap-2 ">
-                              <button
-                                onClick={() =>
-                                  handleDownload(campaignArr.campaigns[index])
-                                }
+                              <CSVLink
+                                // onClick={() =>
+                                //   handleDownload(campaignArr.campaigns[index])
+                                // }
+                                data={[campaignArr.campaigns[index]]}
                                 className="px-4 md:w-[120px] py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               >
                                 Export data
-                              </button>{" "}
+                              </CSVLink>{" "}
                               <ImageDownloadButton
                                 imageUrl={campaign.imageUrl}
                                 fileName={"Campaign Picture"}
@@ -204,14 +272,15 @@ const Dashboard = () => {
                               {campaign.CampaignStatus}
                             </td>
                             <td className="flex gap-4 px-4 py-2 border sm:gap-2">
-                              <button
-                                onClick={() =>
-                                  handleDownload(campaignArr.campaigns[index])
-                                }
+                              <CSVLink
+                                // onClick={() =>
+                                // handleDownload(campaignArr.campaigns[index])
+                                data={[campaignArr.campaigns[index]]}
+                                // }
                                 className="px-4 md:w-[120px] py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                               >
                                 Export data
-                              </button>{" "}
+                              </CSVLink>{" "}
                               <ImageDownloadButton
                                 className="px-4 py-2 mr-2 font-bold text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                                 imageUrl={campaign.imageUrl}

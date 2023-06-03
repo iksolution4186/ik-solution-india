@@ -58,7 +58,7 @@ const Dashboard = () => {
       }
     }
     getDocument();
-  }, []);
+  }, [router, user]);
 
   const handleDownload = (object) => {
     const excelFile = generateExcel([object]);
@@ -151,14 +151,15 @@ const Dashboard = () => {
                             {campaign.CampaignStatus}
                           </td>
                           <td className="flex gap-4 px-4 py-2 border sm:gap-2">
-                            <button
-                              onClick={() =>
-                                handleDownload(campaigns.campaigns[index])
-                              }
+                            <CSVLink
+                              // onClick={() =>
+                              //   handleDownload(campaigns.campaigns[index])
+                              // }
+                              data={[campaigns.campaigns[index]]}
                               className="px-4 md:w-[120px] py-2 mr-2 text-white rounded bg-secondary hover:bg-gradient-to-l from-primary to-tertiary hover:text-secondary"
                             >
                               Export data
-                            </button>{" "}
+                            </CSVLink>{" "}
                             <ImageDownloadButton
                               imageUrl={campaign.imageUrl}
                               fileName={"Campaign Picture"}
