@@ -3,7 +3,7 @@ const serviceDescription = [
     for: "app-development",
     title: "App Development",
     subTitle:
-      "We can help bring your ideas to life by creating functional solutions that are tailored to your business needs and goals. Our experienced team will work closely with you to ensure that your vision is realized, and the final product is both user-friendly and scalable..",
+        "We can help bring your ideas to life by creating functional solutions that are tailored to your business needs and goals. Our experienced team will work closely with you to ensure that your vision is realized, and the final product is both user-friendly and scalable..",
     path: [
       {
         title: "App Development Process",
@@ -80,7 +80,7 @@ const serviceDescription = [
     for: "web-development",
     title: "Web Development",
     subTitle:
-      "Our cutting-edge web solutions are expertly crafted with the latest technology and industry best practices to meet the ever-evolving demands of modern businesses. From dynamic and responsive website design to seamless e-commerce integration and intuitive user experience, we offer a comprehensive suite of innovative web solutions that are tailored to your business needs and goals.",
+        "Our cutting-edge web solutions are expertly crafted with the latest technology and industry best practices to meet the ever-evolving demands of modern businesses. From dynamic and responsive website design to seamless e-commerce integration and intuitive user experience, we offer a comprehensive suite of innovative web solutions that are tailored to your business needs and goals.",
     path: [
       {
         title: "Web Development Process",
@@ -161,7 +161,7 @@ const serviceDescription = [
     for: "seo-sem-smm",
     title: "SEO/SEM/SMM",
     subTitle:
-      "We can help your brand become more visible in online searches by using the latest SEO techniques to optimize your online presence. Our team uses on-page and off-page optimizations to increase your website's ranking in search engine results, driving more traffic to your site and helping you reach your target audience.",
+        "We can help your brand become more visible in online searches by using the latest SEO techniques to optimize your online presence. Our team uses on-page and off-page optimizations to increase your website's ranking in search engine results, driving more traffic to your site and helping you reach your target audience.",
     path: [
       {
         title: "Entire Process",
@@ -238,7 +238,7 @@ const serviceDescription = [
     for: "graphic-designing",
     title: "Graphic Designing",
     subTitle:
-      "We can help visually communicate your brand story and values through stunning design. Our team uses a strategic and creative approach to design logos, brand identities, website designs, and marketing collateral that are tailored to your business goals and effectively convey your message to your target audience.",
+        "We can help visually communicate your brand story and values through stunning design. Our team uses a strategic and creative approach to design logos, brand identities, website designs, and marketing collateral that are tailored to your business goals and effectively convey your message to your target audience.",
     path: [
       {
         title: "Graphic Designing Process",
@@ -316,12 +316,12 @@ const serviceDescription = [
     for: "digital-marketing",
     title: "Digital Marketing",
     subTitle:
-      "We can help you connect with your target audience by creating effective marketing strategies that increase brand awareness and drive conversions. Our team uses market research, analytics, and consumer behavior insights to create targeted campaigns that resonate with your audience.",
+        "We can help you connect with your target audience by creating effective marketing strategies that increase brand awareness and drive conversions. Our team uses market research, analytics, and consumer behavior insights to create targeted campaigns that resonate with your audience.",
     path: [
       {
         title: "Digital Marketing Process",
         subTitle:
-          "Take your business to the next level with our digital marketing expertise",
+            "Take your business to the next level with our digital marketing expertise",
         desc: "Let our team of seasoned digital marketing professionals be your strategic partner in achieving your business goals by leveraging our expertise, creativity, and innovation to deliver measurable results and sustained growth.",
         cardsData: [
           {
@@ -392,6 +392,159 @@ const serviceDescription = [
             title: "Multiple channels",
             desc: "Marketing offers a range of channels that businesses can use to reach their target audience, including search engines, social media, email, mobile apps, and more. This means that businesses can reach their customers wherever they are online, increasing the likelihood of engagement and conversions.",
           },
+        ],
+      },
+    ],
+  },
+  {
+    for: "erp-sf",
+    title: "Salesforce CRM",
+    subTitle:
+        "Our team of certified Salesforce developers has extensive experience in delivering high-quality solutions. Developing the scalable solutions that grow with your business, ensuring long-term success also connecting Salesforce with various systems to create a unified ecosystem, enhancing overall business operations.",
+    path: [
+      {
+        title: "Key Benefits",
+        subTitle:
+            "Tailor-made solutions to meet unique business requirements.",
+        desc: "",
+        cardsData: [
+          {
+            id: 1,
+            title: "Enhanced Customer Insights",
+            desc: "Leveraging Salesforce’s robust CRM capabilities to gain deeper insights into customer behavior and preferences.",
+          },
+
+          {
+            id: 2,
+            title: "Improved Efficiency",
+            desc: "Automating routine tasks and workflows to save time and reduce operational costs.",
+          },
+
+          {
+            id: 3,
+            title: "Data Management",
+            desc: "Migrate data from the running system to Salesforce and Implementing data management best practices to maintain data integrity",
+          },
+
+          {
+            id: 4,
+            title: "Scalability",
+            desc: " Developing scalable solutions that grow with your business, ensuring long-term success.",
+          },
+
+          {
+            id: 5,
+            title: "Customization",
+            desc: "Creating personalized experiences for users by tailoring Salesforce functionalities to meet specific business needs.",
+          },
+
+          {
+            id: 6,
+            title: "Integration",
+            desc: "Connecting Salesforce with various systems to create a unified ecosystem, enhancing overall business operations.",
+          },
+        ],
+      },
+    ],
+    products: [
+      {
+        title: "Why Choose Us for Salesforce Development",
+        desc: "Allow us to provide you with a professional and thorough explanation of the subject matter, leaving no stone unturned and ensuring a complete understanding.",
+        cardsData: [
+          {
+            title: "Expertise",
+            desc: "Our team of certified Salesforce developers has extensive experience in delivering high-quality solutions.",
+          },
+          {
+            title: "Innovation",
+            desc: "We leverage the latest Salesforce technologies to create innovative and efficient solutions.",
+          },
+          {
+            title: "Customer-Centric Approach",
+            desc: "We focus on understanding your business needs and delivering solutions that drive customer satisfaction.",
+          },
+          {
+            title: "Industry Experience",
+            desc: "With experience across various industries such as finance, healthcare, retail, and manufacturing, we understand the unique challenges and opportunities within each sector, enabling us to provide industry-specific solutions.",
+          },
+          {
+            title: "Proven Track Record",
+            desc: "With numerous successful projects, we have a proven track record of helping businesses achieve their goals.",
+          },
+          {
+            title: "Salesforce Maintenance and Support",
+            desc: "Providing ongoing support and maintenance to ensure optimal performance and regular updates to keep the system running smoothly.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    for: "erp-zoho",
+    title: "ZOHO CRM",
+    subTitle:
+        "Zoho development is essential for businesses looking to streamline operations, enhance productivity, and drive growth. By leveraging our expertise in Zoho development, you can transform your business processes and achieve greater efficiency and success...",
+    path: [
+      {
+        title: "Key Benefits",
+        subTitle:
+            "Streamlining Business Operations with Customized Solutions.",
+        desc: "Zoho development involves creating, customizing, and optimizing applications and solutions on the Zoho platform to enhance business processes, improve customer relationship management (CRM), and drive efficiency and growth.",
+        cardsData: [
+          {
+            id: 1,
+            title: "Centralized Operations",
+            desc: "Zoho’s integrated suite of applications allows you to manage various aspects of your business from a single platform, enhancing coordination and efficiency.",
+          },
+
+          {
+            id: 2,
+            title: "Enhanced Productivity",
+            desc: "Automating routine tasks and processes frees up time for your team to focus on strategic activities, boosting overall productivity.",
+          },
+
+          {
+            id: 3,
+            title: "Scalability",
+            desc: "Zoho’s flexible and scalable solutions grow with your business, ensuring long-term success and adaptability.",
+          },
+
+          {
+            id: 4,
+            title: "Customization",
+            desc: "Tailoring Zoho applications to fit your specific business requirements provides a personalized experience for users and meets unique operational needs.",
+          },
+
+          {
+            id: 5,
+            title: "Cost-Effectiveness",
+            desc: "Zoho offers a cost-effective alternative to traditional enterprise software, delivering robust functionalities at a fraction of the cost.",
+          },
+          {
+            id: 6,
+            title: "Monitor and measure results",
+            desc: "Access to accurate and up-to-date information enables businesses to make data-driven decisions, improving strategic planning and operational efficiency.",
+          },
+        ],
+      },
+    ],
+    products: [
+      {
+        title: "Why Choose Us for Zoho Development",
+        desc: "",
+        cardsData: [
+          {
+            title: "Expertise",
+            desc: "Our team of certified Zoho developers has extensive experience in creating and optimizing Zoho solutions for various industries.",
+          },
+          {
+            title: "Innovative Solutions",
+            desc: "We leverage the latest Zoho technologies to deliver innovative solutions that drive efficiency and growth.",
+          },
+          {
+            title: "Client-Centric Approach",
+            desc: "Understanding your business needs is our priority, and we focus on delivering solutions that provide real value and drive customer satisfaction.",
+          }
         ],
       },
     ],
