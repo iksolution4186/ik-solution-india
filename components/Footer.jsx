@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const currentYear = new Date().getFullYear();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -48,8 +49,7 @@ const Footer = () => {
           <strong className="text-lg font-medium">Contact Us</strong>
           <ul className="flex flex-col gap-3 pt-5">
             <li>
-              Address: Parmar Colony, Distt. Hoshiarpur, near Giyan Hospital,
-              Garhshankar, Punjab 144527
+              1st floor near Orobite , Bela - Behrampur road, Garhshankar, Distt. Hoshiarpur, Punjab, Pin – 144527
             </li>
             <li>Email: iksolution4186@gmail.com</li>
             <li>Tel: +91 83604-74290</li>
@@ -160,7 +160,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="text-center bottom m-auto max-w-[1535px] text-primary">
-        <p>© 2023 Ik Solution. All Rights Reserved.</p>
+        <p>© {currentYear} Ik Solution. All Rights Reserved.</p>
       </div>
     </footer>
   );
